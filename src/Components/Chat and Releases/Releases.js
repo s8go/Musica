@@ -1,16 +1,14 @@
 import React from "react";
-import Rectangle from "../../images/pop-songs.jpg";
-import newrelease from "../../data/topchart.json"
 
-const Releases = () => {
+const Releases = ({data, title}) => {
   return (
     <section className="px-6 mt-12 md:ml-24 md:-mt-6">
-      <h5 className="text-white text-2xl">New releases</h5>
+      <h5 className="text-white text-2xl">{title}</h5>
 
       <div className="overflow-x-scroll mt-6 ">
         <div className="flex w-full min-w-max ">
          {
-          newrelease.map((release)=>{
+          data.songs.map((release)=>{
             return  <div className=" mr-2 w-[200px] max-w-md p-0" key={release.id}>
             <div className="flex justify-between">
               <img

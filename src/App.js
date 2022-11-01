@@ -1,9 +1,13 @@
+import songdata from "./data/topchart.json";
 import Header from "./Components/Header/Header";
-import Chart from "./Components/Chat and Releases/Chart";
+import Chart from "./Components/Chat and Releases/TopAlbum";
 import Collection from "./Components/Collection/Collection";
-import Tomorrows from "./Components/Collection/Tomorrows";
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import ViewSong from "./Components/Collection/ViewSong";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Components/AppNav/Nav";
+import { useState } from "react";
+import songfile from "./data/lago-city.mp3";
+
 /*
 prev
 
@@ -28,24 +32,63 @@ vol
 
 */
 function App() {
+  const [data, setData] = useState(songdata);
+  const [focusedSong, setFocusedSong] = useState(songdata.songs[0]);
+  const [nowPlaying, setPlaying] = useState({});
+  let song = {
+    title: "lagos city",
+    artist: "Caze",
+    data: new Audio(songfile),
+  };
+
+  console.log(nowPlaying);
+
+  function playsong(x) {
+    song.data.play();
+  }
+
+  function pausesong() {
+    nowPlaying.data.pause();
+  }
+
+  function ChangeFocus(el) {
+    setFocusedSong(el);
+  }
+
+  function addToCollection(x) {
+    setData((curr) => {
+      return { ...curr, collection: [x, ...curr.collection] };
+    });
+  }
 
   return (
     <>
-      <div className="bg-gray-800 py-16">
-       
-       <BrowserRouter>
+      <div className="bg-gray-800 py-16 min-h-screen">
+        <BrowserRouter>
+          <Nav />
 
-       <Nav/>
-       
-      <Routes>
-     
-      <Route index element={<Header/>}></Route>
-        <Route path="Tomorrows" element={<Tomorrows/>}></Route>
-        <Route path="Collection" element={<Collection/>}></Route>
-    
-
-      </Routes>
-       </BrowserRouter>
+          <Routes>
+            <Route
+              index
+              element={<Header data={data} ChangeFocus={ChangeFocus} />}
+            ></Route>
+            <Route
+              path="topsongs"
+              element={
+                <ViewSong
+                  data={data}
+                  focusedSong={focusedSong}
+                  addToCollection={addToCollection}
+                  playsong={playsong}
+                />
+              }
+            ></Route>
+            <Route
+              path="Collection"
+              element={<Collection data={data} />}
+            ></Route>
+          </Routes>
+        </BrowserRouter>
       </div>
     </>
   );
