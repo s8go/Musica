@@ -8,8 +8,8 @@ const Releases = ({data, title}) => {
       <div className="overflow-x-scroll mt-6 ">
         <div className="flex w-full min-w-max ">
          {
-          data.songs.map((release)=>{
-            return  <div className=" mr-2 w-[200px] max-w-md p-0" key={release.id}>
+          data.songs.map((release, i)=>{
+            return  <div className=" mr-2 w-[200px] max-w-md p-0" key={i}>
             <div className="flex justify-between">
               <img
                 src={release.image}

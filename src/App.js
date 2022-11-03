@@ -5,8 +5,7 @@ import Collection from "./Components/Collection/Collection";
 import ViewSong from "./Components/Collection/ViewSong";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Components/AppNav/Nav";
-import { useState } from "react";
-import songfile from "./data/lago-city.mp3";
+import { useEffect, useState } from "react";
 
 /*
 prev
@@ -35,13 +34,12 @@ function App() {
   const [data, setData] = useState(songdata);
   const [focusedSong, setFocusedSong] = useState(songdata.songs[0]);
   const [nowPlaying, setPlaying] = useState({});
+
   let song = {
     title: "lagos city",
     artist: "Caze",
-    data: new Audio(songfile),
+    // data: new Audio(songfile),
   };
-
-  console.log(nowPlaying);
 
   function playsong(x) {
     song.data.play();

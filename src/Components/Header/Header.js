@@ -13,8 +13,8 @@ const Header = ({ data, ChangeFocus }) => {
       <header className="h-full md:h-[500px] text-white px-6 pt-16 md:ml-24 md:pt-0 md:flex md:justify-between md:items-center">
         <div></div>
 
-        <div className="flex flex-col justify-between bg-blue-300 rounded-3xl p-4 my-8 md:my-0 h-[70vh] w-full md:w-[60%] md:h-[70%]">
-          <h5 className="font-thin text-sm md:text-xl">Curratee playlist</h5>
+        <div className="flex flex-col justify-between bg-blue-300 rounded-3xl p-4 my-8 md:my-0 h-[70vh] w-full md:w-[60%] md:h-[70%] bg-header-image bg-contain bg-top-right bg-no-repeat">
+          <h5 className="font-thin text-sm md:text-xl">Currate playlist</h5>
           <div>
             <h2 className="text-3xl font-medium">R & B Hits</h2>
             <p className="text-sm font-light mt-2">

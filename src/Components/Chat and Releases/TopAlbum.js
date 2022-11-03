@@ -13,9 +13,9 @@ const Chart = ({data, ChangeFocus}) => {
       <div className="overflow-x-scroll overflow-y-hidden mt-8 md:mt-2 md:overflow-x-hidden md:-ml-8 lg:ml-0 md:overflow-y-scroll md:h-[85%]">
         <div className="flex w-full min-w-fit  md:px-2 md:flex-col min-h-fit">
      {
-      data.songs.map((chart)=>{
+      data.songs.map((chart, i)=>{
         return   <div
-        key={chart.id}
+        key={i}
         className="bg-gray-900 cursor-default rounded-3xl m-2 md:mx-0 lg:h-[85px] p-2 min-h-fit w-[250px] max-w-[470px] md:w-full min-w-fit"
         onClick={() => {
           ChangeFocus(chart)

@@ -1,23 +1,24 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Nav = () => {
   const Navigate = useNavigate();
   const [showMenu, setMenu] = useState(false);
-
   return (
     <>
-      <nav className={`md:block ${showMenu ? "block" : "hidden"}  w-full h-full pt-8 fixed z-[1001] md:left-4 top-8 md:top-8 md:w-[5%] md:h-[57%] md:my-8 min-w-fit`}>
-        <ul className="bg-gray-900 md:rounded-full md:w-12 m-auto h-screen md:h-auto">
+      <nav
+        className={` bg-gray-900
+        md:flex flex-col justify-center items-center ${
+          showMenu ? "flex" : "hidden"
+        }  w-full h-screen  py-8  fixed z-[1001]  md:left-4 top-8 md:top-28 md:w-[5%] md:h-[57%] md:my-8 min-w-fit`}
+      >
+        <ul className=" md:rounded-full md:w-12  w-full py-3 md:py-0">
           <li
-            className=" flex w-1/2 m-auto pt-12 md:pt-4  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-4 md:m-2 hover:text-gray-300 duration-500 "
-            onClick={() => {
-              Navigate("/");
-              setMenu(false)
-
-            }}
+            className=" flex w-1/2 m-auto pt-12 md:pt-4  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 "
+       
           >
-            <div>
+           <Link className={"flex"} to={"/"}>
+           <div>
               <svg
                 width="18"
                 height="20"
@@ -27,22 +28,23 @@ const Nav = () => {
               >
                 <path
                   d="M6.38171 18.0503V15.239C6.3817 14.5266 6.96099 13.9478 7.67852 13.9433H10.3132C11.0339 13.9433 11.6182 14.5234 11.6182 15.239V18.0421C11.6182 18.66 12.1203 19.1622 12.7427 19.1667H14.5401C15.3796 19.1688 16.1855 18.8392 16.7799 18.2507C17.3742 17.6621 17.7083 16.8629 17.7083 16.0294V8.0437C17.7083 7.37045 17.4077 6.73183 16.8875 6.29989L10.781 1.45142C9.7136 0.603372 8.18905 0.630768 7.15323 1.51661L1.17805 6.29989C0.633305 6.7191 0.307716 7.35961 0.291626 8.0437V16.0213C0.291626 17.7584 1.71006 19.1667 3.45978 19.1667H5.21623C5.51587 19.1688 5.80399 19.0522 6.01664 18.8426C6.2293 18.633 6.34889 18.3478 6.34888 18.0503H6.38171Z"
-                  fill="#FACD66"
+                  // fill="#FACD66"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
                 />
               </svg>
             </div>
 
-            <p className="md:hidden text-white text-lg">home</p>
+            <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+              home
+            </p>
+           </Link>
           </li>
 
-          <li
-            className=" flex  w-1/2 m-auto  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-4 md:m-2 hover:text-gray-300 duration-500 "
-            onClick={() => {
-              Navigate("/Collection");
-              setMenu(false)
-            }}
-          >
-            <svg
+          <li className=" flex  w-1/2 m-auto  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 ">
+           <Link className={"flex justify-between"} to={"collection"}>
+           
+           <svg
               width="20"
               height="14"
               viewBox="0 0 20 14"
@@ -56,30 +58,38 @@ const Nav = () => {
               />
             </svg>
 
-            <p className="md:hidden text-white text-lg">collection</p>
+            <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+              collection
+            </p>
+            </Link>
           </li>
 
-          <li className=" flex w-1/2 m-auto  md:flex-col items-center bg justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-4 md:m-2 hover:text-gray-300 duration-500 ">
-            <svg
-              width="20"
-              height="17"
-              viewBox="0 0 20 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M14.5833 0.583328H5.41665C5.17831 0.583328 4.94915 0.592495 4.72915 0.629162C2.36415 0.904162 0.833313 2.65499 0.833313 5.16666V11.5833C0.833313 14.3333 2.66665 16.1667 5.41665 16.1667H14.5833C17.3333 16.1667 19.1666 14.3333 19.1666 11.5833V5.16666C19.1666 2.41666 17.3333 0.583328 14.5833 0.583328ZM6.22331 10.6667C4.95831 10.6667 3.93165 9.63999 3.93165 8.37499C3.93165 7.10999 4.95831 6.08333 6.22331 6.08333C7.48831 6.08333 8.51498 7.10999 8.51498 8.37499C8.51498 9.63999 7.48831 10.6667 6.22331 10.6667ZM12.1816 10.8958H11.7233C11.3475 10.8958 11.0358 10.5842 11.0358 10.2083C11.0358 9.83249 11.3475 9.52083 11.7233 9.52083H12.1816C12.5575 9.52083 12.8691 9.83249 12.8691 10.2083C12.8691 10.5842 12.5575 10.8958 12.1816 10.8958ZM15.39 10.8958H14.9316C14.5558 10.8958 14.2441 10.5842 14.2441 10.2083C14.2441 9.83249 14.5558 9.52083 14.9316 9.52083H15.39C15.7658 9.52083 16.0775 9.83249 16.0775 10.2083C16.0775 10.5842 15.7658 10.8958 15.39 10.8958ZM15.39 7.22916H11.7233C11.3475 7.22916 11.0358 6.91749 11.0358 6.54166C11.0358 6.16583 11.3475 5.85416 11.7233 5.85416H15.39C15.7658 5.85416 16.0775 6.16583 16.0775 6.54166C16.0775 6.91749 15.7658 7.22916 15.39 7.22916Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-            </svg>
+          <li className=" flex w-1/2 m-auto  md:flex-col items-center bg justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 ">
+            <Link className={"flex justify-between"}>
+              <svg
+                width="20"
+                height="17"
+                viewBox="0 0 20 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.5833 0.583328H5.41665C5.17831 0.583328 4.94915 0.592495 4.72915 0.629162C2.36415 0.904162 0.833313 2.65499 0.833313 5.16666V11.5833C0.833313 14.3333 2.66665 16.1667 5.41665 16.1667H14.5833C17.3333 16.1667 19.1666 14.3333 19.1666 11.5833V5.16666C19.1666 2.41666 17.3333 0.583328 14.5833 0.583328ZM6.22331 10.6667C4.95831 10.6667 3.93165 9.63999 3.93165 8.37499C3.93165 7.10999 4.95831 6.08333 6.22331 6.08333C7.48831 6.08333 8.51498 7.10999 8.51498 8.37499C8.51498 9.63999 7.48831 10.6667 6.22331 10.6667ZM12.1816 10.8958H11.7233C11.3475 10.8958 11.0358 10.5842 11.0358 10.2083C11.0358 9.83249 11.3475 9.52083 11.7233 9.52083H12.1816C12.5575 9.52083 12.8691 9.83249 12.8691 10.2083C12.8691 10.5842 12.5575 10.8958 12.1816 10.8958ZM15.39 10.8958H14.9316C14.5558 10.8958 14.2441 10.5842 14.2441 10.2083C14.2441 9.83249 14.5558 9.52083 14.9316 9.52083H15.39C15.7658 9.52083 16.0775 9.83249 16.0775 10.2083C16.0775 10.5842 15.7658 10.8958 15.39 10.8958ZM15.39 7.22916H11.7233C11.3475 7.22916 11.0358 6.91749 11.0358 6.54166C11.0358 6.16583 11.3475 5.85416 11.7233 5.85416H15.39C15.7658 5.85416 16.0775 6.16583 16.0775 6.54166C16.0775 6.91749 15.7658 7.22916 15.39 7.22916Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
+                />
+              </svg>
 
-            <p className="md:hidden text-white text-lg">videos</p>
-
+              <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+                videos
+              </p>
+            </Link>
           </li>
 
-          <li className=" flex w-1/2 m-auto md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-4 md:m-2 hover:text-gray-300 duration-500 ">
-            <svg
+          <li className=" flex w-1/2 m-auto md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 ">
+           <Link className={"flex justify-between"}>
+           
+           <svg
               width="22"
               height="22"
               viewBox="0 0 22 22"
@@ -137,61 +147,96 @@ const Nav = () => {
                 fillOpacity="0.25"
               />
             </svg>
-            <p className="md:hidden text-white text-lg">radio</p>
-
+            <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+              radio
+            </p>
+           </Link>
           </li>
         </ul>
 
-        <ul className="bg-gray-900 md:rounded-full md:w-12 md:m-auto -mt-4">
-        <li className=" flex w-1/2 m-auto md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-4 md:m-2 hover:text-gray-300 duration-500 ">
-    <svg
-              width="22"
-              height="22"
-              viewBox="0 0 22 22"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g opacity="0.25">
-                <path
-                  d="M11 1.83333C8.59837 1.83333 6.64587 3.78583 6.64587 6.18749C6.64587 8.54333 8.48837 10.45 10.89 10.5325C10.9634 10.5233 11.0367 10.5233 11.0917 10.5325C11.11 10.5325 11.1192 10.5325 11.1375 10.5325C11.1467 10.5325 11.1467 10.5325 11.1559 10.5325C13.5025 10.45 15.345 8.54333 15.3542 6.18749C15.3542 3.78583 13.4017 1.83333 11 1.83333Z"
-                  fill="#EFEEE0"
-                />
-                <path
-                  d="M15.6566 12.9708C13.0991 11.2658 8.9283 11.2658 6.35246 12.9708C5.1883 13.75 4.54663 14.8042 4.54663 15.9317C4.54663 17.0592 5.1883 18.1042 6.3433 18.8742C7.62663 19.7358 9.3133 20.1667 11 20.1667C12.6866 20.1667 14.3733 19.7358 15.6566 18.8742C16.8116 18.095 17.4533 17.05 17.4533 15.9133C17.4441 14.7858 16.8116 13.7408 15.6566 12.9708Z"
-                  fill="#EFEEE0"
-                />
-              </g>
-            </svg>
+      <ul className=" w-full  mt-0 md:mt-8 md:rounded-full md:w-12 m-auto md:h-auto py-3 md:py-0 pb-8">
+          <li
+            className=" flex w-1/2 m-auto md:pt-8  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto md:m-2 hover:text-gray-300 duration-500 "
+          >
+         <Link className={"flex justify-between"}>
+         <div>
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 22 22"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g opacity="0.25">
+                  <path
+                    d="M11 1.83333C8.59837 1.83333 6.64587 3.78583 6.64587 6.18749C6.64587 8.54333 8.48837 10.45 10.89 10.5325C10.9634 10.5233 11.0367 10.5233 11.0917 10.5325C11.11 10.5325 11.1192 10.5325 11.1375 10.5325C11.1467 10.5325 11.1467 10.5325 11.1559 10.5325C13.5025 10.45 15.345 8.54333 15.3542 6.18749C15.3542 3.78583 13.4017 1.83333 11 1.83333Z"
+                    fill="#EFEEE0"
+                  />
+                  <path
+                    d="M15.6566 12.9708C13.0991 11.2658 8.9283 11.2658 6.35246 12.9708C5.1883 13.75 4.54663 14.8042 4.54663 15.9317C4.54663 17.0592 5.1883 18.1042 6.3433 18.8742C7.62663 19.7358 9.3133 20.1667 11 20.1667C12.6866 20.1667 14.3733 19.7358 15.6566 18.8742C16.8116 18.095 17.4533 17.05 17.4533 15.9133C17.4441 14.7858 16.8116 13.7408 15.6566 12.9708Z"
+                    fill="#EFEEE0"
+                  />
+                </g>
+              </svg>
+            </div>
 
-            <p className="md:hidden text-white text-lg">profile</p>
+            <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+              profile
+            </p>
+         </Link>
           </li>
 
-          <li className=" flex w-1/2 m-auto md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-4 md:m-2 hover:text-gray-300 duration-500 ">
-  <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9.53498 0.833333C11.8107 0.833333 13.6666 2.6575 13.6666 4.90333V9.29417H8.07072C7.66967 9.29417 7.35257 9.60583 7.35257 10C7.35257 10.385 7.66967 10.7058 8.07072 10.7058H13.6666V15.0875C13.6666 17.3333 11.8107 19.1667 9.51633 19.1667H4.9743C2.6893 19.1667 0.833313 17.3425 0.833313 15.0967V4.9125C0.833313 2.6575 2.69862 0.833333 4.98363 0.833333H9.53498ZM15.9952 6.83768C16.2702 6.55352 16.7193 6.55352 16.9943 6.82852L19.671 9.49602C19.8085 9.63352 19.8818 9.80768 19.8818 10.0002C19.8818 10.1835 19.8085 10.3668 19.671 10.4952L16.9943 13.1627C16.8568 13.3002 16.6735 13.3735 16.4993 13.3735C16.316 13.3735 16.1327 13.3002 15.9952 13.1627C15.7202 12.8877 15.7202 12.4385 15.9952 12.1635L17.4618 10.706H13.6668V9.29435H17.4618L15.9952 7.83685C15.7202 7.56185 15.7202 7.11268 15.9952 6.83768Z"
-                fill="rgb(80, 80, 80)"
-              />
-            </svg>
-            <p className="md:hidden text-white text-lg">logout</p>
+          <li
+            className=" flex w-1/2 m-auto  md:pt-4  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 "
+       
+          >
+         <Link className={"flex justify-between"}>
+         <div>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9.53498 0.833333C11.8107 0.833333 13.6666 2.6575 13.6666 4.90333V9.29417H8.07072C7.66967 9.29417 7.35257 9.60583 7.35257 10C7.35257 10.385 7.66967 10.7058 8.07072 10.7058H13.6666V15.0875C13.6666 17.3333 11.8107 19.1667 9.51633 19.1667H4.9743C2.6893 19.1667 0.833313 17.3425 0.833313 15.0967V4.9125C0.833313 2.6575 2.69862 0.833333 4.98363 0.833333H9.53498ZM15.9952 6.83768C16.2702 6.55352 16.7193 6.55352 16.9943 6.82852L19.671 9.49602C19.8085 9.63352 19.8818 9.80768 19.8818 10.0002C19.8818 10.1835 19.8085 10.3668 19.671 10.4952L16.9943 13.1627C16.8568 13.3002 16.6735 13.3735 16.4993 13.3735C16.316 13.3735 16.1327 13.3002 15.9952 13.1627C15.7202 12.8877 15.7202 12.4385 15.9952 12.1635L17.4618 10.706H13.6668V9.29435H17.4618L15.9952 7.83685C15.7202 7.56185 15.7202 7.11268 15.9952 6.83768Z"
+                  fill="rgb(80, 80, 80)"
+                />
+              </svg>
+            </div>
+
+            <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+              logout
+            </p>
+         </Link>
           </li>
         </ul>
       </nav>
 
       <div className="flex justify-between bg-slate-900  fixed top-0 left-0 w-full px-4 py-2 min-w-fit z-[1001]">
         <div className="flex  items-center  justify-between md:justify-start ">
-          <div className="cursor-pointer " onClick={()=> setMenu(!showMenu)}>
-            <div className={`${showMenu ? "rotate-45 origin-left w-8" : "w-6"} md:hidden mr-4 bg-white h-[.1em]`}></div>
-            <div className={`${showMenu ? "-rotate-45 origin-center w-8" : "w-4"} md:hidden mr-4 bg-white  h-[.1em] mt-1`}></div>
-            <div className={`${!showMenu ? "w-2" : "w-0"} md:hidden mr-4 bg-white  h-[.1em] mt-1`}></div>
+          <div className="cursor-pointer " onClick={() => setMenu(!showMenu)}>
+            <div
+              className={`${
+                showMenu ? "rotate-45 origin-left w-8" : "w-6"
+              } md:hidden mr-4 bg-white h-[.1em]`}
+            ></div>
+            <div
+              className={`${
+                showMenu ? "-rotate-45 origin-center w-8" : "w-4"
+              } md:hidden mr-4 bg-white  h-[.1em] mt-1`}
+            ></div>
+            <div
+              className={`${
+                !showMenu ? "w-2" : "w-0"
+              } md:hidden mr-4 bg-white  h-[.1em] mt-1`}
+            ></div>
           </div>
-          <div className="flex cursor-pointer ml-1 " onClick={()=>Navigate("/")}>
+          <div
+            className="flex cursor-pointer ml-1 "
+            onClick={() => Navigate("/")}
+          >
             <div>
               <svg
                 width="20"
