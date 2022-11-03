@@ -7,60 +7,56 @@ const Nav = () => {
   return (
     <>
       <nav
-        className={` bg-gray-900
-        md:flex flex-col justify-center items-center ${
+        className={` bg-gray-900 md:bg-transparent
+         md:flex flex-col justify-center items-center ${
           showMenu ? "flex" : "hidden"
         }  w-full h-screen  py-8  fixed z-[1001]  md:left-4 top-8 md:top-28 md:w-[5%] md:h-[57%] md:my-8 min-w-fit`}
       >
-        <ul className=" md:rounded-full md:w-12  w-full py-3 md:py-0">
-          <li
-            className=" flex w-1/2 m-auto pt-12 md:pt-4  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 "
-       
-          >
-           <Link className={"flex"} to={"/"}>
-           <div>
+        <ul className=" bg-gray-900 md:rounded-full md:w-12  w-full py-3 md:py-0">
+          <li className=" flex w-1/2 m-auto pt-12 md:pt-4  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 ">
+            <Link className={"flex"} to={"/"}>
+              <div>
+                <svg
+                  width="18"
+                  height="20"
+                  viewBox="0 0 18 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.38171 18.0503V15.239C6.3817 14.5266 6.96099 13.9478 7.67852 13.9433H10.3132C11.0339 13.9433 11.6182 14.5234 11.6182 15.239V18.0421C11.6182 18.66 12.1203 19.1622 12.7427 19.1667H14.5401C15.3796 19.1688 16.1855 18.8392 16.7799 18.2507C17.3742 17.6621 17.7083 16.8629 17.7083 16.0294V8.0437C17.7083 7.37045 17.4077 6.73183 16.8875 6.29989L10.781 1.45142C9.7136 0.603372 8.18905 0.630768 7.15323 1.51661L1.17805 6.29989C0.633305 6.7191 0.307716 7.35961 0.291626 8.0437V16.0213C0.291626 17.7584 1.71006 19.1667 3.45978 19.1667H5.21623C5.51587 19.1688 5.80399 19.0522 6.01664 18.8426C6.2293 18.633 6.34889 18.3478 6.34888 18.0503H6.38171Z"
+                    // fill="#FACD66"
+                    fill="#EFEEE0"
+                    fillOpacity="0.25"
+                  />
+                </svg>
+              </div>
+
+              <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+                home
+              </p>
+            </Link>
+          </li>
+
+          <li className=" flex  w-1/2 m-auto  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 ">
+            <Link className={"flex justify-between"} to={"collection"}>
               <svg
-                width="18"
-                height="20"
-                viewBox="0 0 18 20"
+                width="20"
+                height="14"
+                viewBox="0 0 20 14"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M6.38171 18.0503V15.239C6.3817 14.5266 6.96099 13.9478 7.67852 13.9433H10.3132C11.0339 13.9433 11.6182 14.5234 11.6182 15.239V18.0421C11.6182 18.66 12.1203 19.1622 12.7427 19.1667H14.5401C15.3796 19.1688 16.1855 18.8392 16.7799 18.2507C17.3742 17.6621 17.7083 16.8629 17.7083 16.0294V8.0437C17.7083 7.37045 17.4077 6.73183 16.8875 6.29989L10.781 1.45142C9.7136 0.603372 8.18905 0.630768 7.15323 1.51661L1.17805 6.29989C0.633305 6.7191 0.307716 7.35961 0.291626 8.0437V16.0213C0.291626 17.7584 1.71006 19.1667 3.45978 19.1667H5.21623C5.51587 19.1688 5.80399 19.0522 6.01664 18.8426C6.2293 18.633 6.34889 18.3478 6.34888 18.0503H6.38171Z"
-                  // fill="#FACD66"
+                  d="M16.4166 0.681667C16.1233 0.599167 15.8208 0.5625 15.5 0.5625H4.49998C4.17915 0.5625 3.87665 0.599167 3.58331 0.681667C2.00665 1.09417 0.833313 2.53333 0.833313 4.22917V9.72917C0.833313 11.7458 2.48331 13.3958 4.49998 13.3958H15.5C17.5166 13.3958 19.1666 11.7458 19.1666 9.72917V4.22917C19.1666 2.53333 17.9933 1.09417 16.4166 0.681667ZM13.6666 5.17333V9.04167C13.6666 10.0867 12.8141 10.9392 11.7691 10.9392C10.7241 10.9392 9.87165 10.0867 9.87165 9.04167C9.87165 7.99667 10.7241 7.14417 11.7691 7.14417C11.9525 7.14417 12.1266 7.18083 12.2916 7.22667V6.07167L9.22081 6.90583V9.84833C9.22081 9.8575 9.22081 9.86667 9.21165 9.87583C9.20248 10.9117 8.34998 11.755 7.31415 11.755C6.26915 11.755 5.41665 10.9025 5.41665 9.84833C5.41665 8.79417 6.26915 7.95083 7.31415 7.95083C7.49748 7.95083 7.67165 7.9875 7.84581 8.03333V6.38333V4.9625C7.84581 4.17417 8.34081 3.5325 9.09248 3.33083L11.5216 2.66167C12.3008 2.45083 12.7958 2.6525 13.0708 2.86333C13.3458 3.07417 13.6666 3.48667 13.6666 4.3025V5.17333Z"
                   fill="#EFEEE0"
                   fillOpacity="0.25"
                 />
               </svg>
-            </div>
 
-            <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
-              home
-            </p>
-           </Link>
-          </li>
-
-          <li className=" flex  w-1/2 m-auto  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 ">
-           <Link className={"flex justify-between"} to={"collection"}>
-           
-           <svg
-              width="20"
-              height="14"
-              viewBox="0 0 20 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M16.4166 0.681667C16.1233 0.599167 15.8208 0.5625 15.5 0.5625H4.49998C4.17915 0.5625 3.87665 0.599167 3.58331 0.681667C2.00665 1.09417 0.833313 2.53333 0.833313 4.22917V9.72917C0.833313 11.7458 2.48331 13.3958 4.49998 13.3958H15.5C17.5166 13.3958 19.1666 11.7458 19.1666 9.72917V4.22917C19.1666 2.53333 17.9933 1.09417 16.4166 0.681667ZM13.6666 5.17333V9.04167C13.6666 10.0867 12.8141 10.9392 11.7691 10.9392C10.7241 10.9392 9.87165 10.0867 9.87165 9.04167C9.87165 7.99667 10.7241 7.14417 11.7691 7.14417C11.9525 7.14417 12.1266 7.18083 12.2916 7.22667V6.07167L9.22081 6.90583V9.84833C9.22081 9.8575 9.22081 9.86667 9.21165 9.87583C9.20248 10.9117 8.34998 11.755 7.31415 11.755C6.26915 11.755 5.41665 10.9025 5.41665 9.84833C5.41665 8.79417 6.26915 7.95083 7.31415 7.95083C7.49748 7.95083 7.67165 7.9875 7.84581 8.03333V6.38333V4.9625C7.84581 4.17417 8.34081 3.5325 9.09248 3.33083L11.5216 2.66167C12.3008 2.45083 12.7958 2.6525 13.0708 2.86333C13.3458 3.07417 13.6666 3.48667 13.6666 4.3025V5.17333Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-            </svg>
-
-            <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
-              collection
-            </p>
+              <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+                collection
+              </p>
             </Link>
           </li>
 
@@ -87,79 +83,7 @@ const Nav = () => {
           </li>
 
           <li className=" flex w-1/2 m-auto md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 ">
-           <Link className={"flex justify-between"}>
-           
-           <svg
-              width="22"
-              height="22"
-              viewBox="0 0 22 22"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10.3125 7.205H1.83337V14.8408C1.83337 14.8958 1.83337 14.9508 1.84254 14.9967H10.3125V7.205Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-              <path
-                d="M7.04919 5.83H10.3125V1.83333H7.07669V5.71999C7.07669 5.75666 7.05836 5.79333 7.04919 5.83Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-              <path
-                d="M5.70168 5.72V1.98C3.66668 2.40166 2.33751 3.75833 1.95251 5.83H5.72001C5.71085 5.79333 5.70168 5.75666 5.70168 5.72Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-              <path
-                d="M14.8683 1.83333H11.6875V5.83H14.8683V1.83333Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-              <path
-                d="M16.2341 5.83001H20.0475C19.6625 3.74001 18.315 2.37417 16.2433 1.97084V5.80251C16.2433 5.81167 16.2341 5.82084 16.2341 5.83001Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-              <path
-                d="M16.2433 20.0292C18.2508 19.635 19.5708 18.3517 20.0016 16.3717H16.2433V20.0292Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-              <path
-                d="M14.8683 16.3717H11.6875V20.1667H14.8683V16.3717Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-              <path
-                d="M11.6875 14.9967H20.1575C20.1667 14.9508 20.1667 14.8958 20.1667 14.8408V7.205H11.6875V14.9967Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-              <path
-                d="M10.3125 16.3717H7.07666V20.1667H10.3125V16.3717Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-              <path
-                d="M1.99829 16.3717C2.42912 18.3333 3.73079 19.6167 5.70162 20.02V16.3717H1.99829Z"
-                fill="#EFEEE0"
-                fillOpacity="0.25"
-              />
-            </svg>
-            <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
-              radio
-            </p>
-           </Link>
-          </li>
-        </ul>
-
-      <ul className=" w-full  mt-0 md:mt-8 md:rounded-full md:w-12 m-auto md:h-auto py-3 md:py-0 pb-8">
-          <li
-            className=" flex w-1/2 m-auto md:pt-8  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto md:m-2 hover:text-gray-300 duration-500 "
-          >
-         <Link className={"flex justify-between"}>
-         <div>
+            <Link className={"flex justify-between"}>
               <svg
                 width="22"
                 height="22"
@@ -167,49 +91,115 @@ const Nav = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g opacity="0.25">
-                  <path
-                    d="M11 1.83333C8.59837 1.83333 6.64587 3.78583 6.64587 6.18749C6.64587 8.54333 8.48837 10.45 10.89 10.5325C10.9634 10.5233 11.0367 10.5233 11.0917 10.5325C11.11 10.5325 11.1192 10.5325 11.1375 10.5325C11.1467 10.5325 11.1467 10.5325 11.1559 10.5325C13.5025 10.45 15.345 8.54333 15.3542 6.18749C15.3542 3.78583 13.4017 1.83333 11 1.83333Z"
-                    fill="#EFEEE0"
-                  />
-                  <path
-                    d="M15.6566 12.9708C13.0991 11.2658 8.9283 11.2658 6.35246 12.9708C5.1883 13.75 4.54663 14.8042 4.54663 15.9317C4.54663 17.0592 5.1883 18.1042 6.3433 18.8742C7.62663 19.7358 9.3133 20.1667 11 20.1667C12.6866 20.1667 14.3733 19.7358 15.6566 18.8742C16.8116 18.095 17.4533 17.05 17.4533 15.9133C17.4441 14.7858 16.8116 13.7408 15.6566 12.9708Z"
-                    fill="#EFEEE0"
-                  />
-                </g>
-              </svg>
-            </div>
-
-            <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
-              profile
-            </p>
-         </Link>
-          </li>
-
-          <li
-            className=" flex w-1/2 m-auto  md:pt-4  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 "
-       
-          >
-         <Link className={"flex justify-between"}>
-         <div>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
                 <path
-                  d="M9.53498 0.833333C11.8107 0.833333 13.6666 2.6575 13.6666 4.90333V9.29417H8.07072C7.66967 9.29417 7.35257 9.60583 7.35257 10C7.35257 10.385 7.66967 10.7058 8.07072 10.7058H13.6666V15.0875C13.6666 17.3333 11.8107 19.1667 9.51633 19.1667H4.9743C2.6893 19.1667 0.833313 17.3425 0.833313 15.0967V4.9125C0.833313 2.6575 2.69862 0.833333 4.98363 0.833333H9.53498ZM15.9952 6.83768C16.2702 6.55352 16.7193 6.55352 16.9943 6.82852L19.671 9.49602C19.8085 9.63352 19.8818 9.80768 19.8818 10.0002C19.8818 10.1835 19.8085 10.3668 19.671 10.4952L16.9943 13.1627C16.8568 13.3002 16.6735 13.3735 16.4993 13.3735C16.316 13.3735 16.1327 13.3002 15.9952 13.1627C15.7202 12.8877 15.7202 12.4385 15.9952 12.1635L17.4618 10.706H13.6668V9.29435H17.4618L15.9952 7.83685C15.7202 7.56185 15.7202 7.11268 15.9952 6.83768Z"
-                  fill="rgb(80, 80, 80)"
+                  d="M10.3125 7.205H1.83337V14.8408C1.83337 14.8958 1.83337 14.9508 1.84254 14.9967H10.3125V7.205Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
+                />
+                <path
+                  d="M7.04919 5.83H10.3125V1.83333H7.07669V5.71999C7.07669 5.75666 7.05836 5.79333 7.04919 5.83Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
+                />
+                <path
+                  d="M5.70168 5.72V1.98C3.66668 2.40166 2.33751 3.75833 1.95251 5.83H5.72001C5.71085 5.79333 5.70168 5.75666 5.70168 5.72Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
+                />
+                <path
+                  d="M14.8683 1.83333H11.6875V5.83H14.8683V1.83333Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
+                />
+                <path
+                  d="M16.2341 5.83001H20.0475C19.6625 3.74001 18.315 2.37417 16.2433 1.97084V5.80251C16.2433 5.81167 16.2341 5.82084 16.2341 5.83001Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
+                />
+                <path
+                  d="M16.2433 20.0292C18.2508 19.635 19.5708 18.3517 20.0016 16.3717H16.2433V20.0292Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
+                />
+                <path
+                  d="M14.8683 16.3717H11.6875V20.1667H14.8683V16.3717Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
+                />
+                <path
+                  d="M11.6875 14.9967H20.1575C20.1667 14.9508 20.1667 14.8958 20.1667 14.8408V7.205H11.6875V14.9967Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
+                />
+                <path
+                  d="M10.3125 16.3717H7.07666V20.1667H10.3125V16.3717Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
+                />
+                <path
+                  d="M1.99829 16.3717C2.42912 18.3333 3.73079 19.6167 5.70162 20.02V16.3717H1.99829Z"
+                  fill="#EFEEE0"
+                  fillOpacity="0.25"
                 />
               </svg>
-            </div>
+              <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+                radio
+              </p>
+            </Link>
+          </li>
+        </ul>
 
-            <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
-              logout
-            </p>
-         </Link>
+        <ul className="bg-gray-900 w-full  mt-0 md:mt-8 md:rounded-full md:w-12 m-auto md:h-auto py-3 md:py-0 pb-8">
+          <li className=" flex w-1/2 m-auto md:pt-8  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto md:m-2 hover:text-gray-300 duration-500 ">
+            <Link className={"flex justify-between"}>
+              <div>
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g opacity="0.25">
+                    <path
+                      d="M11 1.83333C8.59837 1.83333 6.64587 3.78583 6.64587 6.18749C6.64587 8.54333 8.48837 10.45 10.89 10.5325C10.9634 10.5233 11.0367 10.5233 11.0917 10.5325C11.11 10.5325 11.1192 10.5325 11.1375 10.5325C11.1467 10.5325 11.1467 10.5325 11.1559 10.5325C13.5025 10.45 15.345 8.54333 15.3542 6.18749C15.3542 3.78583 13.4017 1.83333 11 1.83333Z"
+                      fill="#EFEEE0"
+                    />
+                    <path
+                      d="M15.6566 12.9708C13.0991 11.2658 8.9283 11.2658 6.35246 12.9708C5.1883 13.75 4.54663 14.8042 4.54663 15.9317C4.54663 17.0592 5.1883 18.1042 6.3433 18.8742C7.62663 19.7358 9.3133 20.1667 11 20.1667C12.6866 20.1667 14.3733 19.7358 15.6566 18.8742C16.8116 18.095 17.4533 17.05 17.4533 15.9133C17.4441 14.7858 16.8116 13.7408 15.6566 12.9708Z"
+                      fill="#EFEEE0"
+                    />
+                  </g>
+                </svg>
+              </div>
+
+              <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+                profile
+              </p>
+            </Link>
+          </li>
+
+          <li className=" flex w-1/2 m-auto  md:pt-4  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto py-2 md:py-4 md:m-2 hover:text-gray-300 duration-500 ">
+            <Link className={"flex justify-between"}>
+              <div>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.53498 0.833333C11.8107 0.833333 13.6666 2.6575 13.6666 4.90333V9.29417H8.07072C7.66967 9.29417 7.35257 9.60583 7.35257 10C7.35257 10.385 7.66967 10.7058 8.07072 10.7058H13.6666V15.0875C13.6666 17.3333 11.8107 19.1667 9.51633 19.1667H4.9743C2.6893 19.1667 0.833313 17.3425 0.833313 15.0967V4.9125C0.833313 2.6575 2.69862 0.833333 4.98363 0.833333H9.53498ZM15.9952 6.83768C16.2702 6.55352 16.7193 6.55352 16.9943 6.82852L19.671 9.49602C19.8085 9.63352 19.8818 9.80768 19.8818 10.0002C19.8818 10.1835 19.8085 10.3668 19.671 10.4952L16.9943 13.1627C16.8568 13.3002 16.6735 13.3735 16.4993 13.3735C16.316 13.3735 16.1327 13.3002 15.9952 13.1627C15.7202 12.8877 15.7202 12.4385 15.9952 12.1635L17.4618 10.706H13.6668V9.29435H17.4618L15.9952 7.83685C15.7202 7.56185 15.7202 7.11268 15.9952 6.83768Z"
+                    fill="rgb(80, 80, 80)"
+                  />
+                </svg>
+              </div>
+
+              <p className="md:hidden text-white text-sm w-[100px] text-left ml-8">
+                logout
+              </p>
+            </Link>
           </li>
         </ul>
       </nav>
