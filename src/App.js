@@ -1,11 +1,12 @@
 import songdata from "./data/topchart.json";
 import Header from "./Components/Header/Header";
 import Chart from "./Components/Chat and Releases/TopAlbum";
-import Collection from "./Components/Collection/Collection";
+import Catalogue from "./Components/Collection/Catalogue";
 import ViewSong from "./Components/Collection/ViewSong";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Components/AppNav/Nav";
 import { useEffect, useState } from "react";
+import Error from "./Components/Error/Error";
 
 /*
 prev
@@ -82,8 +83,18 @@ function App() {
               }
             ></Route>
             <Route
-              path="Collection"
-              element={<Collection data={data} />}
+              path="collection"
+              element={<Catalogue data={data} />}
+            ></Route>
+
+            <Route
+              path="home"
+              element={<Header data={data} ChangeFocus={ChangeFocus} />}
+            ></Route>
+
+<Route
+              path="*"
+              element={<Error/>}
             ></Route>
           </Routes>
         </BrowserRouter>

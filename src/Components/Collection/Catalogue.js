@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import Rectangle from "../../images/Rectangle 14.png";
 
-const Collection = ({ data }) => {
+const Catalogue = ({ data }) => {
+
+  const [currentView, setCurrentView] = useState("collection");
+
   const collectionSkeleton = data.collection.map((col, index) => {
     return (
       <div
@@ -38,10 +41,10 @@ const Collection = ({ data }) => {
   return (
     <section className="mt-12 px-6 md:ml-24 min-w-fit">
       <div className="flex flex-wrap justify-between md:justify-start">
-        <button className="rounded-full bg-yellow-300 p-3 text-sm w-[48%] max-w-[350px] md:p-2 md:w-32 md:mr-6 min-w-fit ">
+        <button className={`rounded-full ${currentView === "collection" ? "bg-yellow-300" : "border-2 border-gray-600 text-gray-600" } p-3 text-sm w-[48%] max-w-[350px] md:p-2 md:w-32 md:mr-6 min-w-fit`} onClick={()=>setCurrentView("collection")}>
           My collection
         </button>
-        <button className="border-2 border-gray-600 rounded-full p-3 text-gray-600 text-sm w-[48%] max-w-[350px] md:p-2 min-w-fit md:w-32">
+        <button className={` ${currentView === "likes" ? "bg-yellow-300" : "border-2 border-gray-600 text-gray-600" } rounded-full p-3  text-sm w-[48%] max-w-[350px] md:p-2 min-w-fit md:w-32`}  onClick={()=>setCurrentView("likes")}>
           Likes
         </button>
       </div>
@@ -58,4 +61,4 @@ const Collection = ({ data }) => {
   );
 };
 
-export default Collection;
+export default Catalogue;
