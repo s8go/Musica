@@ -1,11 +1,10 @@
 import songdata from "./data/topchart.json";
 import Header from "./Components/Header/Header";
-import Chart from "./Components/Chat and Releases/TopAlbum";
 import Catalogue from "./Components/Collection/Catalogue";
 import ViewSong from "./Components/Collection/ViewSong";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Components/AppNav/Nav";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Error from "./Components/Error/Error";
 
 /*
@@ -34,21 +33,7 @@ vol
 function App() {
   const [data, setData] = useState(songdata);
   const [focusedSong, setFocusedSong] = useState(songdata.songs[0]);
-  const [nowPlaying, setPlaying] = useState({});
-
-  let song = {
-    title: "lagos city",
-    artist: "Caze",
-    // data: new Audio(songfile),
-  };
-
-  function playsong(x) {
-    song.data.play();
-  }
-
-  function pausesong() {
-    nowPlaying.data.pause();
-  }
+ 
 
   function ChangeFocus(el) {
     setFocusedSong(el);
@@ -78,7 +63,7 @@ function App() {
                   data={data}
                   focusedSong={focusedSong}
                   addToCollection={addToCollection}
-                  playsong={playsong}
+               
                 />
               }
             ></Route>

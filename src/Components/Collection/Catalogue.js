@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Rectangle from "../../images/Rectangle 14.png";
 
 const Catalogue = ({ data }) => {
 

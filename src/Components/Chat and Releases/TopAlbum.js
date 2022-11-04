@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Rectangle from "../../images/Rectangle 14.png";
 
 const Chart = ({data, ChangeFocus}) => {
   const Navigate = useNavigate();

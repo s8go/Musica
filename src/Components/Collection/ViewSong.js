@@ -1,7 +1,7 @@
 import React from "react";
 import Rectangle from "../../images/Rectangle 26 (3).png";
 
-const ViewSong = ({ data, focusedSong, addToCollection, playsong }) => {
+const ViewSong = ({  focusedSong, addToCollection }) => {
 
   
   return (
@@ -22,7 +22,7 @@ const ViewSong = ({ data, focusedSong, addToCollection, playsong }) => {
           </div>
 
           <div className="mt-6 justify-start hidden md:flex">
-            <div onClick={()=>playsong("")} className="cursor-pointer bg-gray-700 m-1 p-3 rounded-3xl text-xs w-1/3 md:w-26  min-w-fit flex flex-wrap justify-evenly items-center">
+            <div className="cursor-pointer bg-gray-700 m-1 p-3 rounded-3xl text-xs w-1/3 md:w-26  min-w-fit flex flex-wrap justify-evenly items-center">
               <div className="w-fit">
                 <svg
                   width="14"

@@ -1,5 +1,4 @@
 import React from "react";
-import Nav from "../AppNav/Nav";
 import Chart from "../Chat and Releases/TopAlbum";
 import Releases from "../Chat and Releases/Releases";
 
