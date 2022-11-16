@@ -7,8 +7,14 @@ module.exports = {
     extend: {
       backgroundImage: {
         'header-image': "url('/src/images/Vector.png')"
-      }
+      },
+     backgroundColor:{
+        "play": "rgb(0, 0, 0, 0.5)"
+      },
+      
     },
   },
-  plugins: [],
+  plugins: [
+  
+  ],
 }
