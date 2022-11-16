@@ -14,6 +14,7 @@ function App() {
   const [data, setData] = useState(songdata);
   const [focusedSong, setFocusedSong] = useState(songdata.songs[0]);
   const [currentPlay, setCurrentPlay] = useState(data.songs[0])
+  console.dir(setCurrentPlay)
 
  
 

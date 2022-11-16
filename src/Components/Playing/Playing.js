@@ -7,7 +7,7 @@ import repeat from "../../images/repeate-one.png";
 import volume from "../../images/volume-high.png";
 
 const Playing = ({ currentPlay }) => {
-  console.log(currentPlay);
+
   return (
     <div className="bg-play backdrop-blur-lg fixed left-0 w-screen min-h-[100px] sm:h-20 p-4 bottom-0 flex z-[100000]">
       <div className="text-white flex flex-wrap justify-start items-center  w-2/3 md:w-1/3 gap-2">
