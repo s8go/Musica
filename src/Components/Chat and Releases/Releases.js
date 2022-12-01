@@ -1,11 +1,12 @@
 import React from "react";
+import image from "../../images/download.jpg"
 
 const Releases = ({data, title}) => {
   return (
     <section className="px-6 mt-12 md:ml-24 md:-mt-6">
       <h5 className="text-white text-2xl">{title}</h5>
 
-      <div className="overflow-x-scroll mt-6 ">
+      <div className="overflow-x-scroll mt-6">
         <div className="flex w-full min-w-max ">
          {
           data.songs.map((release, i)=>{
@@ -14,6 +15,7 @@ const Releases = ({data, title}) => {
               <img
                 src={release.image}
                 alt="music artwork"
+                
                 className="block w-[150px]"
               />
             </div>

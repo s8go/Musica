@@ -3,8 +3,8 @@ import Chart from "../Chat and Releases/TopAlbum";
 import Releases from "../Chat and Releases/Releases";
 import Likes from "../../images/Frame 4.png"
 
-
 const Header = ({ data, ChangeFocus }) => {
+  
   return (
     <>
       <header className="h-full md:h-[500px] text-white px-6 pt-16 md:ml-24 md:pt-0 md:flex md:justify-between md:items-center">
@@ -33,7 +33,7 @@ const Header = ({ data, ChangeFocus }) => {
         <Releases data={data} title="Trending Songs" />
       </div>
 
-      <div className="lg:mt-20">
+      <div className="lg:mt-20 mb-16 ">
         <Releases data={data} title="Recomended For You" />
       </div>
     </>

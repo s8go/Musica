@@ -6,7 +6,7 @@ import shuffle from "../../images/shuffle.png";
 import repeat from "../../images/repeate-one.png";
 import volume from "../../images/volume-high.png";
 
-const Playing = ({ currentPlay }) => {
+const Playing = ({ currentPlay, playSong, nextSong, prevSong }) => {
 
   return (
     <div className="bg-play backdrop-blur-lg fixed left-0 w-screen min-h-[100px] sm:h-20 p-4 bottom-0 flex z-[100000]">
@@ -34,11 +34,12 @@ const Playing = ({ currentPlay }) => {
           />
           <img
             src={previous}
+            onClick={prevSong}
             alt="controls"
             className="hidden md:block cursor-pointer"
           />
-          <img src={play} alt="controls" className="cursor-pointer" />
-          <img src={next} alt="controls" className="cursor-pointer" />
+          <img src={play} alt="controls" className="cursor-pointer" onClick={playSong}/>
+          <img src={next} alt="controls" className="cursor-pointer" onClick={nextSong}/>
           <img
             src={repeat}
             alt="controls"

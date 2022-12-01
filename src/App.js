@@ -2,21 +2,42 @@ import songdata from "./data/topchart.json";
 import Header from "./Components/Header/Header";
 import Catalogue from "./Components/Collection/Catalogue";
 import ViewSong from "./Components/Collection/ViewSong";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Components/AppNav/Nav";
-import {  useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Error from "./Components/Error/Error";
 import Playing from "./Components/Playing/Playing";
-
+import allsongs from "./data/topchart.json"
+import {songs} from "./Songs"
 
 function App() {
   const [data, setData] = useState(songdata);
   const [focusedSong, setFocusedSong] = useState(songdata.songs[0]);
-  const [currentPlay, setCurrentPlay] = useState(data.songs[0])
-  console.dir(setCurrentPlay)
+  const [songPlay, setSongPlay] = useState(false);
+  const [playIndex, setPlayIndex] = useState(0)
+  const [currentPlay, setCurrentPlay] = useState(allsongs.songs[playIndex]);
+  const myjam = useRef();
 
+  // const daa = new Audio(jam)
+
+  console.log(currentPlay)
+useEffect(()=>{
+  setCurrentPlay(curr => allsongs.songs[playIndex])
+ if(songPlay) myjam.current.play();
+ else myjam.current.pause(); 
+})
  
+  function playSong() {
+ setSongPlay(curr=> !curr)
+  }
+
+  function nextSong() {
+    setPlayIndex(curr => curr+1)
+  }
+
+  function prevSong() {
+    if(playIndex > 0) setPlayIndex(curr => curr-1);
+  }
 
   function ChangeFocus(el) {
     setFocusedSong(el);
@@ -27,14 +48,22 @@ function App() {
       return { ...curr, collection: [x, ...curr.collection] };
     });
   }
-console.log(currentPlay.artist)
 
   return (
     <>
       <div className="bg-gray-800 py-16 min-h-screen">
+
+      <audio preload="auto" src={allsongs.songs[playIndex].path} ref={myjam}></audio>
+
         <BrowserRouter>
+
           <Nav />
-          <Playing currentPlay={currentPlay}/>
+          <Playing
+            currentPlay={currentPlay}
+            playSong={playSong}
+            nextSong={nextSong}
+            prevSong={prevSong}
+          />
 
           <Routes>
             <Route
@@ -48,7 +77,6 @@ console.log(currentPlay.artist)
                   data={data}
                   focusedSong={focusedSong}
                   addToCollection={addToCollection}
-               
                 />
               }
             ></Route>
@@ -62,10 +90,7 @@ console.log(currentPlay.artist)
               element={<Header data={data} ChangeFocus={ChangeFocus} />}
             ></Route>
 
-<Route
-              path="*"
-              element={<Error/>}
-            ></Route>
+            <Route path="*" element={<Error />}></Route>
           </Routes>
         </BrowserRouter>
       </div>

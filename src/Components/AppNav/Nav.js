@@ -238,6 +238,8 @@ const Nav = () => {
             </NavLink>
           </li>
         </ul>
+
+      
       </nav>
 
       <div className="flex justify-between bg-slate-900  fixed top-0 left-0 w-full px-4 py-2 min-w-fit z-[1001]">
@@ -325,6 +327,8 @@ const Nav = () => {
             </svg>
           </div>
         </div>
+
+
       </div>
     </>
   );
