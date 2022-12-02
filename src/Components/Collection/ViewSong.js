@@ -1,20 +1,26 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import Rectangle from "../../images/Rectangle 26 (3).png";
 
-const ViewSong = ({  focusedSong, addToCollection }) => {
+const ViewSong = ({ addToCollection, data }) => {
+  const { id } = useParams();
+  const focusedAlbum = data.albums.filter(album=>{
+    if(album.title === id){
+      return album;
+    }
+  })
 
-  
   return (
     <section>
       <div className="bg-purple-900 px-2 sm:px-8 pt-20 md:pl-32 md:flex md:pb-12">
         <img
           className="block m-auto md:m-0 w-full  h-1/2 md:w-[25%] md:h-1/2 min-w-[300px] "
-          src={focusedSong.image}
+          src={focusedAlbum[0].image}
           alt="soundbox"
         />
         <div className="md:ml-8 flex flex-col justify-between pb-8">
           <div>
-            <h1 className="text-blue-200 text-4xl mt-6">{focusedSong.title}</h1>
+            <h1 className="text-blue-200 text-4xl mt-6">{focusedAlbum[0].title}</h1>
             <p className="text-gray-300 text-lg mt-4">
               Pre-save some of the most anticipated songs...
             </p>
@@ -57,7 +63,7 @@ const ViewSong = ({  focusedSong, addToCollection }) => {
               <p
                 className="text-sm cursor-pointer"
                 onClick={() => {
-                  addToCollection(focusedSong);
+                  addToCollection(focusedAlbum[0]);
                   console.log("Song Added");
                 }}
               >
@@ -125,7 +131,7 @@ const ViewSong = ({  focusedSong, addToCollection }) => {
             <p
               className="text-sm  pl-2 "
               onClick={() => {
-                addToCollection(focusedSong);
+                addToCollection(focusedAlbum[0]);
                 console.log("Song Added");
               }}
             >
@@ -149,49 +155,55 @@ const ViewSong = ({  focusedSong, addToCollection }) => {
                 />
               </svg>
             </div>
-            <p className="text-base"> </p>
+            <p className="text-base"></p>
           </div>
         </div>
 
-        <div className="flex bg-gray-700 lg:w-4/5 lg:h-18  justify-between p-2 pr-8 rounded-lg mt-6 md:ml-24 md:mt-16">
-          <div className="flex items-center">
-            <div className="min-w-fit mr-4  flex items-center">
-              <img src={Rectangle} alt="Artwork" className="w-12" />
-             <div className="w-fit  ml-2">
-             <svg
-                width="18"
-                height="16"
-                viewBox="0 0 18 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M1.43496 8.37182C0.540791 5.58016 1.58662 2.10933 4.51746 1.16599C6.05912 0.668493 7.96162 1.08349 9.04246 2.57433C10.0616 1.02849 12.0191 0.671826 13.5591 1.16599C16.4891 2.10933 17.5408 5.58016 16.6475 8.37182C15.2558 12.7968 10.4 15.1018 9.04246 15.1018C7.68579 15.1018 2.87329 12.8485 1.43496 8.37182Z"
-                  stroke="#EFEEE0"
-                  strokeWidth="0.625"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-             </div>
+        {
+          focusedAlbum[0].tracks.map((track, i)=>{
+            return <div key={i} className="flex bg-gray-700 lg:w-4/5 lg:h-18  justify-between p-2 pr-8 rounded-lg mt-6 md:ml-24 md:mt-16">
+            <div className="flex items-center">
+              <div className="min-w-fit mr-4  flex items-center">
+                <img src={focusedAlbum[0].image} alt="Artwork" className="w-12" />
+                <div className="w-fit  ml-2">
+                  <svg
+                    width="18"
+                    height="16"
+                    viewBox="0 0 18 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M1.43496 8.37182C0.540791 5.58016 1.58662 2.10933 4.51746 1.16599C6.05912 0.668493 7.96162 1.08349 9.04246 2.57433C10.0616 1.02849 12.0191 0.671826 13.5591 1.16599C16.4891 2.10933 17.5408 5.58016 16.6475 8.37182C15.2558 12.7968 10.4 15.1018 9.04246 15.1018C7.68579 15.1018 2.87329 12.8485 1.43496 8.37182Z"
+                      stroke="#EFEEE0"
+                      strokeWidth="0.625"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+  
+              <div className="md:flex md:items-baseline ">
+                <p className="text-gray-200 text-sm md:text-xl md:ml-8">
+                  {`${track} ~ ${focusedAlbum[0].artist}`}
+                </p>
+  
+                <p className="text-gray-300 text-xs md:text-base md:ml-4">
+                  Single
+                </p>
+              </div>
             </div>
-
-            <div className="md:flex md:items-baseline ">
-              <p className="text-gray-200 text-sm md:text-xl md:ml-8">Let me love you ~ Krisx</p>
-
-              <p className="text-gray-300 text-xs md:text-base md:ml-4">Single</p>
+  
+            <div className="text-gray-400 text-right flex flex-col justify-between md:flex-row md:items-baseline ">
+              <p className="text-xl text-yellow-600 md:order-2 md:ml-4">...</p>
+              <p>4:17</p>
             </div>
           </div>
-
-          <div className="text-gray-400 text-right flex flex-col justify-between md:flex-row md:items-baseline ">
-            <p className="text-xl text-yellow-600 md:order-2 md:ml-4">...</p>
-            <p>4:17</p>
-          </div>
-        </div>
-
-       
+          })
+        }
       </div>
     </section>
   );

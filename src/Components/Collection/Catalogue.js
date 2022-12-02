@@ -1,17 +1,20 @@
 import React, {useState} from "react";
+import image from "../../images/hypertension.jpeg"
+
+console.log(image)
 
 const Catalogue = ({ data }) => {
 
   const [currentView, setCurrentView] = useState("collection");
 
-  const collectionSkeleton = data.collection.map((col, index) => {
+  const collectionSkeleton = data?.collection.map((col, index) => {
     return (
       <div
         key={index}
         className="rounded-2xl cursor-pointer bg-gray-300 w-[200px] mx-auto h-fit mt-4 flex flex-col justify-end md:mt-8 md:mx-3 md:w-[230px]"
       >
         <div className=" w-full md:mb-6 ">
-          <img src={col.image} alt="album cover" className="inline-block h-[150px] w-full rounded-t-2xl"/>
+          <img src={image} alt="album cover" className="inline-block h-[150px] w-full rounded-t-2xl"/>
           <h3 className="md:text-2xl px-4">{col.title}</h3>
           <p className="text-xs text-gray-600 md:text-sm px-4">{col.artist}</p>
         </div>

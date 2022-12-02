@@ -12,13 +12,13 @@ const Chart = ({data, ChangeFocus}) => {
       <div className="overflow-x-scroll overflow-y-hidden mt-8 md:mt-2 md:overflow-x-hidden md:-ml-8 lg:ml-0 md:overflow-y-scroll md:h-[85%]">
         <div className="flex w-full min-w-fit  md:px-2 md:flex-col min-h-fit">
      {
-      data.songs.map((chart, i)=>{
+      data.albums.map((chart, i)=>{
         return   <div
-        key={i}
+        key={chart.id}
         className="bg-gray-900 cursor-default rounded-3xl m-2 md:mx-0 lg:h-[85px] p-2 min-h-fit w-[250px] max-w-[470px] md:w-full min-w-fit"
         onClick={() => {
           ChangeFocus(chart)
-          Navigate("/topsongs");
+          Navigate(`/topalbums/${chart.title}`);
         }}
       >
         <div className="flex justify-evenly flex-col md:flex-row md:gap-4 p-1">
@@ -78,7 +78,7 @@ const Chart = ({data, ChangeFocus}) => {
               {chart.title}
             </h6>
             <p className="text-gray-500 md:text-xs">{chart.artist}</p>
-            <p className="text-white text-xs mt-8 md:mt-2">{chart.length}</p>
+            <p className="text-white text-xs mt-8 md:mt-2">24:56</p>
           </div>
 
           <div className=" invisible md:visible  w-1/3">

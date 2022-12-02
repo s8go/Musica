@@ -6,7 +6,12 @@ import shuffle from "../../images/shuffle.png";
 import repeat from "../../images/repeate-one.png";
 import volume from "../../images/volume-high.png";
 
-const Playing = ({ currentPlay, playSong, nextSong, prevSong }) => {
+const Playing = ({
+  currentPlay,
+  playSong,
+  nextSong,
+  prevSong
+}) => {
 
   return (
     <div className="bg-play backdrop-blur-lg fixed left-0 w-screen min-h-[100px] sm:h-20 p-4 bottom-0 flex z-[100000]">
@@ -17,10 +22,7 @@ const Playing = ({ currentPlay, playSong, nextSong, prevSong }) => {
           className="block w-16 rounded-xl mr-4"
         />
         <div>
-          <h5 className="text-white text-lg">
-            {currentPlay.artist}
-           
-          </h5>
+          <h5 className="text-white text-xs md:text-sm">{currentPlay.artist}</h5>
           <p className="text-sm md:text-base font-light">{currentPlay.title}</p>
         </div>
       </div>
@@ -38,8 +40,18 @@ const Playing = ({ currentPlay, playSong, nextSong, prevSong }) => {
             alt="controls"
             className="hidden md:block cursor-pointer"
           />
-          <img src={play} alt="controls" className="cursor-pointer" onClick={playSong}/>
-          <img src={next} alt="controls" className="cursor-pointer" onClick={nextSong}/>
+          <img
+            src={play}
+            alt="controls"
+            className="cursor-pointer"
+            onClick={playSong}
+          />
+          <img
+            src={next}
+            alt="controls"
+            className="cursor-pointer"
+            onClick={nextSong}
+          />
           <img
             src={repeat}
             alt="controls"
@@ -48,7 +60,17 @@ const Playing = ({ currentPlay, playSong, nextSong, prevSong }) => {
         </div>
 
         <div className="hidden md:flex items-end w-4/5 px-4  h-1/2">
-          <input type="range" name="play-length" id="play" className="w-full" />
+          <input
+            type="range"
+            name="play-length"
+            id="play"
+            className="w-full"
+            // max={}
+            // value={seekValue}
+            // onChange={(e) =>  {
+            //   console.log(e.target.max, currentTime)
+            // }}
+          />
         </div>
       </div>
 
@@ -56,12 +78,7 @@ const Playing = ({ currentPlay, playSong, nextSong, prevSong }) => {
         <img src={volume} alt="vol" className="block mr-4" />
         <div className="text-white flex items-start">
           {" "}
-          <input
-            type="range"
-            name="play-length"
-            id="play"
-            className="w-full"
-          />
+          <input type="range" name="play-length" id="play" className="w-full" />
         </div>
       </div>
     </div>

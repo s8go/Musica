@@ -1,4 +1,4 @@
-import songdata from "./data/topchart.json";
+import ReactAudioPlayer from "react-audio-player";
 import Header from "./Components/Header/Header";
 import Catalogue from "./Components/Collection/Catalogue";
 import ViewSong from "./Components/Collection/ViewSong";
@@ -9,22 +9,24 @@ import Error from "./Components/Error/Error";
 import Playing from "./Components/Playing/Playing";
 import allsongs from "./data/topchart.json"
 import {songs} from "./Songs"
+import Mood from "./data/Bella-Shmurda-Ase-(TrendyBeatz.com).mp3"
+console.log(Mood)
 
 function App() {
-  const [data, setData] = useState(songdata);
-  const [focusedSong, setFocusedSong] = useState(songdata.songs[0]);
+  const react_audio = useRef();
+  const [data, setData] = useState(allsongs);
+  const [focusedSong, setFocusedSong] = useState(allsongs.songs[0]);
   const [songPlay, setSongPlay] = useState(false);
-  const [playIndex, setPlayIndex] = useState(0)
+const [playIndex, setPlayIndex] = useState(Math.floor(Math.random() * allsongs.songs.length))
   const [currentPlay, setCurrentPlay] = useState(allsongs.songs[playIndex]);
-  const myjam = useRef();
-
-  // const daa = new Audio(jam)
-
-  console.log(currentPlay)
+  const duration = useRef(react_audio.current?.audioEl.current.duration);
+console.log(allsongs.songs[6])
 useEffect(()=>{
-  setCurrentPlay(curr => allsongs.songs[playIndex])
- if(songPlay) myjam.current.play();
- else myjam.current.pause(); 
+  setCurrentPlay(curr => allsongs.songs[playIndex]);
+  duration.current = react_audio.current?.audioEl.current.duration;
+ 
+ if(songPlay) react_audio.current?.audioEl.current.play();
+ else react_audio.current?.audioEl.current.pause(); 
 })
  
   function playSong() {
@@ -32,7 +34,8 @@ useEffect(()=>{
   }
 
   function nextSong() {
-    setPlayIndex(curr => curr+1)
+  if(playIndex + 1 !== allsongs.songs.length)   setPlayIndex(curr => curr+1)
+  else setPlayIndex(0)
   }
 
   function prevSong() {
@@ -53,7 +56,7 @@ useEffect(()=>{
     <>
       <div className="bg-gray-800 py-16 min-h-screen">
 
-      <audio preload="auto" src={allsongs.songs[playIndex].path} ref={myjam}></audio>
+      <ReactAudioPlayer src={allsongs.songs[playIndex].path} ref={react_audio} />
 
         <BrowserRouter>
 
@@ -71,7 +74,7 @@ useEffect(()=>{
               element={<Header data={data} ChangeFocus={ChangeFocus} />}
             ></Route>
             <Route
-              path="topsongs"
+              path="topalbums/:id"
               element={
                 <ViewSong
                   data={data}
