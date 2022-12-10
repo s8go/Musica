@@ -6,29 +6,30 @@ const Chart = ({data, ChangeFocus}) => {
 
 
   return (
-    <section className="h-full ">
-      <h5 className="text-white text-2xl mt-12 md:mt-0">Top Albums</h5>
+    <section className="h-full  ">
+      <h5 className="text-white text-2xl mt-12 lg:mt-0">Top Albums</h5>
 
-      <div className="overflow-x-scroll overflow-y-hidden mt-8 md:mt-2 md:overflow-x-hidden md:-ml-8 lg:ml-0 md:overflow-y-scroll md:h-[85%]">
-        <div className="flex w-full min-w-fit  md:px-2 md:flex-col min-h-fit">
+      <div className="overflow-x-scroll overflow-y-hidden mt-8 md:mt-2 lg:overflow-x-hidden lg:ml-0 lg:overflow-y-scroll lg:h-[85%]">
+        <div className="flex w-full min-w-fit  lg:px-2 h-[250px] lg:flex-col min-h-fit">
      {
       data.albums.map((chart, i)=>{
+        
         return   <div
         key={chart.id}
-        className="bg-gray-900 cursor-default rounded-3xl m-2 md:mx-0 lg:h-[85px] p-2 min-h-fit w-[250px] max-w-[470px] md:w-full min-w-fit"
+        className="bg-[#1A1E1F] cursor-default rounded-3xl m-2 lg:mx-0 lg:h-[85px] p-2 min-h-fit md:h-[190px] w-[250px] max-w-[470px] lg:w-full min-w-fit"
         onClick={() => {
           ChangeFocus(chart)
           Navigate(`/topalbums/${chart.title}`);
         }}
       >
-        <div className="flex justify-evenly flex-col md:flex-row md:gap-4 p-1">
-          <div className="flex justify-between md:w-1/5 md:min-w-[50px]">
+        <div className="flex justify-evenly flex-col lg:flex-row md:gap-4 p-1">
+          <div className="flex justify-between w-full lg:w-1/5 lg:min-w-[50px] ">
             <img
               src={chart.image}
               alt="music artwork"
-              className=" md:w-[150px] h-[60px]"
+              className=" lg:w-[150px] h-[60px] rounded-xl"
             />
-            <div className="text-white w-1/2 text-right visible md:invisible">
+            <div className="text-white w-1/2 text-right visible lg:invisible">
             <div className="relative w-fit m-auto">
           <div className="w-fit m-auto absolute  lg:left-[50%] top-[50%] z-[1000]">
               <svg
@@ -73,15 +74,15 @@ const Chart = ({data, ChangeFocus}) => {
             </div>
           </div>
 
-          <div className="mt-4 md:mt-0 xl:-ml-20 lg:pl-16 md:-pl-8 ">
+          <div className="mt-4 md:mt-0 xl:-ml-20 lg:pl-16 md:-pl-8  ">
             <h6 className="text-white text-xl font-thin md:text-xs">
               {chart.title}
             </h6>
             <p className="text-gray-500 md:text-xs">{chart.artist}</p>
-            <p className="text-white text-xs mt-8 md:mt-2">24:56</p>
+            <p className="text-white text-xs font-thin mt-8 md:mt-2">24:56</p>
           </div>
 
-          <div className=" invisible md:visible  w-1/3">
+          <div className=" invisible lg:visible  w-1/3 ">
           <div className="relative w-fit m-auto">
           <div className="w-fit m-auto absolute  lg:left-[50%] to0-[50%]">
               <svg

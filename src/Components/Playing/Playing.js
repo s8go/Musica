@@ -1,17 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import play from "../../images/Frame 7.png";
 import previous from "../../images/previous.png";
 import next from "../../images/next.png";
 import shuffle from "../../images/shuffle.png";
 import repeat from "../../images/repeate-one.png";
-import volume from "../../images/volume-high.png";
+import volumeSrc from "../../images/volume-high.png";
 
 const Playing = ({
   currentPlay,
   playSong,
   nextSong,
-  prevSong
+  prevSong,
+  duration,
+  songPlay,
+  time,
+  setSongPlay,
+  songTime=0,
 }) => {
+  
+  const [volume, setVolume] = useState(10);
+
+  
+  useEffect(() => {
+    if (songPlay.playing && songTime < duration) {
+      setTimeout(() => {
+        time.setPlayTime((curr) => curr + 1);
+      }, 1000);
+    }
+
+    if (songTime >= duration) {
+      time.setPlayTime(0);
+      !songPlay.loop && nextSong();
+    }
+  });
 
   return (
     <div className="bg-play backdrop-blur-lg fixed left-0 w-screen min-h-[100px] sm:h-20 p-4 bottom-0 flex z-[100000]">
@@ -22,7 +43,9 @@ const Playing = ({
           className="block w-16 rounded-xl mr-4"
         />
         <div>
-          <h5 className="text-white text-xs md:text-sm">{currentPlay.artist}</h5>
+          <h5 className="text-white text-xs md:text-sm">
+            {currentPlay.artist}
+          </h5>
           <p className="text-sm md:text-base font-light">{currentPlay.title}</p>
         </div>
       </div>
@@ -32,13 +55,20 @@ const Playing = ({
           <img
             src={shuffle}
             alt="controls"
-            className="hidden md:block cursor-pointer"
+            className={`hidden md:block cursor-pointer  p-1 ${
+              songPlay.shuffle && "shadow-yellow-300 shadow-inner"
+            }`}
+            onClick={() =>
+              setSongPlay((curr) => {
+                return { ...curr, shuffle: !curr.shuffle };
+              })
+            }
           />
           <img
             src={previous}
-            onClick={prevSong}
+            onClick={() => prevSong()}
             alt="controls"
-            className="hidden md:block cursor-pointer"
+            className="cursor-pointer"
           />
           <img
             src={play}
@@ -50,12 +80,19 @@ const Playing = ({
             src={next}
             alt="controls"
             className="cursor-pointer"
-            onClick={nextSong}
+            onClick={() => nextSong()}
           />
           <img
             src={repeat}
             alt="controls"
-            className="hidden md:block cursor-pointer"
+            className={`hidden md:block cursor-pointer  p-1 ${
+              songPlay.loop && "shadow-yellow-300 shadow-inner"
+            }`}
+            onClick={() =>
+              setSongPlay((curr) => {
+                return { ...curr, loop: !curr.loop };
+              })
+            }
           />
         </div>
 
@@ -65,20 +102,30 @@ const Playing = ({
             name="play-length"
             id="play"
             className="w-full"
-            // max={}
-            // value={seekValue}
-            // onChange={(e) =>  {
-            //   console.log(e.target.max, currentTime)
-            // }}
+            max={duration || 1}
+            value={songTime}
+            onChange={(e) => {
+              e.target.value = songTime;
+            }}
           />
         </div>
       </div>
 
       <div className="justify-center items-center hidden md:flex w-1/5">
-        <img src={volume} alt="vol" className="block mr-4" />
+        <img src={volumeSrc} alt="vol" className="block mr-4" />
         <div className="text-white flex items-start">
           {" "}
-          <input type="range" name="play-length" id="play" className="w-full" />
+          <input
+            type="range"
+            name="play-length"
+            id="play"
+            className="w-full"
+            value={volume}
+            max={10}
+            onChange={(e) => {
+              setVolume(10);
+            }}
+          />
         </div>
       </div>
     </div>
