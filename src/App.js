@@ -7,6 +7,7 @@ import Nav from "./Components/AppNav/Nav";
 import { useState, useEffect, useRef } from "react";
 import Error from "./Components/Error/Error";
 import Playing from "./Components/Playing/Playing";
+import Sgxoe from "./Components/Sgxoe";
 import allsongs from "./data/topchart.json";
 import { songs } from "./Songs";
 
@@ -134,7 +135,7 @@ function App() {
   return (
     <>
       <div
-        className="bg-[#1D2123] py-16 min-h-screen min-w-[200px]"
+        className="bg-[#1D2123] py-20 pb-28 min-h-screen min-w-[200px]"
       >
         <ReactAudioPlayer src={currentPlay.path} ref={react_audio} />
 
@@ -192,6 +193,10 @@ function App() {
 
             <Route path="*" element={<Error />}></Route>
           </Routes>
+
+          <footer className="bg-[#1D2123]  h-[150px] flex justify-center text-white">
+            <Sgxoe/>
+          </footer>
         </BrowserRouter>
       </div>
     </>
