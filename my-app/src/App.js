@@ -10,6 +10,9 @@ import Playing from "./Components/Playing/Playing";
 import Seego from "./Components/Seego";
 import allsongs from "./data/topchart.json";
 import { songs } from "./Songs";
+import NewMusic from "./Components/Upload/NewMusic";
+import PlayUpload from "./Components/Upload/PlayUpload";
+
 
 function App() {
   const react_audio = useRef();
@@ -25,26 +28,23 @@ function App() {
 
   const [currentPlay, setCurrentPlay] = useState(
     allsongs.songs.filter((song) => {
-     let value = song.id === songPlay.playIndex && song;
-     return value;
+      let value = song.id === songPlay.playIndex && song;
+      return value;
     })[0]
   );
 
   //This code does nothing actually
-[songs][0].toString().charAt(0);
-
+  [songs][0].toString().charAt(0);
 
   const currentTime = useRef(0);
   const [duration, setDuration] = useState(0);
 
   useEffect(() => {
-
-    
     setCurrentPlay(
       (curr) =>
         allsongs.songs.filter((song) => {
-         let value = song.id === songPlay.playIndex && song;
-         return value;
+          let value = song.id === songPlay.playIndex && song;
+          return value;
         })[0]
     );
     setTimeout(() => {
@@ -63,13 +63,10 @@ function App() {
     }
   }, [songPlay.playIndex, songPlay.playing, currentPlay]);
 
-
   function playSong() {
     setSongPlay((curr) => {
       return { ...curr, playing: !curr.playing };
     });
-
-
   }
 
   function nextSong() {
@@ -130,13 +127,9 @@ function App() {
     });
   }
 
-
-
   return (
     <>
-      <div
-        className="bg-[#1D2123] py-20 pb-28 min-h-screen min-w-[200px]"
-      >
+      <div className="bg-[#1D2123] py-20 pb-28 min-h-screen min-w-[200px]">
         <ReactAudioPlayer src={currentPlay.path} ref={react_audio} />
 
         <BrowserRouter>
@@ -177,7 +170,7 @@ function App() {
             ></Route>
             <Route
               path="collection"
-              element={<Catalogue data={data} playSong={selectSong}/>}
+              element={<Catalogue data={data} playSong={selectSong} />}
             ></Route>
 
             <Route
@@ -192,10 +185,12 @@ function App() {
             ></Route>
 
             <Route path="*" element={<Error />}></Route>
+            <Route path="/upload" element={<NewMusic />}></Route>
+            <Route path="/newmusic" element={<PlayUpload />}></Route>
           </Routes>
 
           <footer className="bg-[#1D2123]  h-[150px] flex justify-center text-white">
-            <Seego/>
+            <Seego />
           </footer>
         </BrowserRouter>
       </div>
