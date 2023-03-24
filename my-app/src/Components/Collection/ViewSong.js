@@ -1,20 +1,18 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-const ViewSong = ({ data }) => {
-  const { id } = useParams();
-  const focusedAlbum = data.albums.filter(album=>{
-   let value = album.title === id && album;
+const ViewSong = ({ data: focusedAlbum, topic, selectSong }) => {
+  
 
-   return value;
-  })
-
-  let duration = 2.4 * focusedAlbum[0].tracks.length / 60 < 1 &&  2.4 * focusedAlbum[0].tracks.length / 60 * 100;
-
+useEffect(()=>{
+    window.scrollTo(0,0)
+}, [])
 
   return (
     <section className="bg-gradient-to-t from-gray-900 to-[#1D2123] px-4 pb-20 text-[#FFFFFF] w-full">
-      <div className=" pt-20 md:pl-32 md:flex md:pb-12">
+      {
+        focusedAlbum.length > 0 ? <>
+       <div className=" pt-20 md:pl-32 md:flex md:pb-12">
         <img
           className="block m-auto md:m-0 w-full  h-1/2 md:w-[350px] md:h-[350px] sm:min-w-[300px] rounded-[2.5rem]"
           src={focusedAlbum[0].image}
@@ -22,11 +20,19 @@ const ViewSong = ({ data }) => {
         />
         <div className="md:ml-8 flex flex-col justify-between pb-8 md:w-1/2">
           <div>
-            <h1 className="text-[#A4C7C6] text-3xl md:text-5xl mt-6">{focusedAlbum[0].title}</h1>
+            <h1 className="text-[#A4C7C6] text-3xl md:text-5xl mt-6">
+              {topic}
+            </h1>
             <p className="text-[#EFEEE0] text-lg mt-4">
-             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores sapiente rem at reiciendis? Commodi, fugiat quaerat. Eum maiores rem quod!
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores
+              sapiente rem at reiciendis? Commodi, fugiat quaerat. Eum maiores
+              rem quod!
             </p>
-            <p className="text-[#EFEEE0] text-sm mt-4">{focusedAlbum[0].tracks.length} songs ~ {Math.floor(duration)} mins+</p>
+            {/* <p className="text-[#EFEEE0] text-sm mt-4">
+              {focusedAlbum[0].tracks.length} songs ~ {Math.floor( (2.4 * focusedAlbum[0].tracks.length) / 60 < 1 &&
+    ((2.4 * focusedAlbum[0].tracks.length) / 60) * 100)}{" "}
+              mins+
+            </p> */}
           </div>
 
           <div className="mt-6 justify-start hidden lg:flex">
@@ -39,14 +45,13 @@ const ViewSong = ({ data }) => {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  
                   <path
                     d="M7.00001 0.333313C10.6744 0.333313 13.6667 3.32415 13.6667 7.00384C13.6667 10.6758 10.6744 13.6666 7.00001 13.6666C3.32562 13.6666 0.333344 10.6758 0.333344 7.00384C0.333344 3.32415 3.32562 0.333313 7.00001 0.333313ZM6.24068 4.35325C6.09911 4.35325 5.96397 4.38541 5.83527 4.44973C5.6744 4.53978 5.5457 4.68128 5.47491 4.84851C5.42987 4.96428 5.35908 5.3116 5.35908 5.31804C5.2883 5.69752 5.24969 6.31498 5.24969 6.99676C5.24969 7.64703 5.2883 8.23812 5.34621 8.62403C5.35265 8.63047 5.42343 9.0614 5.50065 9.20934C5.64222 9.47948 5.91893 9.64671 6.21494 9.64671H6.24068C6.43373 9.64028 6.83913 9.47305 6.83913 9.46661C7.52125 9.18361 8.86616 8.30244 9.4067 7.71714L9.44531 7.67854C9.5161 7.60779 9.60619 7.49845 9.62549 7.47272C9.72845 7.33765 9.77993 7.17042 9.77993 7.00384C9.77993 6.81667 9.72202 6.64301 9.61262 6.50151C9.58688 6.47578 9.49036 6.36644 9.40027 6.27639C8.8726 5.71038 7.4955 4.78419 6.77478 4.50119C6.66539 4.45681 6.38868 4.35968 6.24068 4.35325Z"
                     fill="#FACD66"
                   />
                 </svg>
               </div>
-              <p className="text-sm">Play all</p>
+              <p className="text-sm" onClick={()=>selectSong(focusedAlbum[0].id)}>Play all</p>
             </div>
             <div className="bg-gray-700 m-1 p-3 rounded-3xl text-xs w-1/3 md:w-[200px] min-w-fit flex flex-wrap justify-around items-center">
               <div className="w-fit">
@@ -63,12 +68,7 @@ const ViewSong = ({ data }) => {
                   />
                 </svg>
               </div>
-              <p
-                className="text-sm cursor-pointer"
-              >
-                {" "}
-                Add to Collection
-              </p>
+              <p className="text-sm cursor-pointer"> Add to Collection</p>
             </div>
 
             <div className="bg-gray-700 m-1 p-3 rounded-3xl text-xs w-fit flex flex-wrap justify-center items-center">
@@ -109,7 +109,7 @@ const ViewSong = ({ data }) => {
                 />
               </svg>
             </div>
-            <p className="text-sm pl-2">Play all</p>
+            <p className="text-sm pl-2" onClick={()=>selectSong(focusedAlbum[0].id)}>Play all</p>
           </div>
           <div className="bg-gray-700 m-1 p-3 rounded-3xl text-xs w-32 md:w-[200px]  min-w-fit flex flex-wrap justify-between items-center">
             <div className="w-fit">
@@ -157,58 +157,67 @@ const ViewSong = ({ data }) => {
           </div>
         </div>
 
-        {
-          focusedAlbum[0].tracks.map((track, i)=>{
-            return <div key={i} className="flex bg-[#33373B] lg:w-4/5 lg:h-18  justify-between p-2 pr-8 rounded-lg mt-6 md:ml-24 cursor-pointer">
-            <div className="flex items-center md:w-full">
-              <div className="min-w-fit mr-4  flex items-center md:justify-between md:w-24">
-                <img src={focusedAlbum[0].image} alt="Artwork" className="w-12" />
-                <div className="w-fit  ml-2">
-                  <svg
-                    width="18"
-                    height="16"
-                    viewBox="0 0 18 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M1.43496 8.37182C0.540791 5.58016 1.58662 2.10933 4.51746 1.16599C6.05912 0.668493 7.96162 1.08349 9.04246 2.57433C10.0616 1.02849 12.0191 0.671826 13.5591 1.16599C16.4891 2.10933 17.5408 5.58016 16.6475 8.37182C15.2558 12.7968 10.4 15.1018 9.04246 15.1018C7.68579 15.1018 2.87329 12.8485 1.43496 8.37182Z"
-                      stroke="#EFEEE0"
-                      strokeWidth="0.625"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+        {focusedAlbum.map((track, i) => {
+         if(i < 20) return (
+            <div
+            onClick={()=>selectSong(track.id)}
+              key={track.id}
+              className="flex bg-[#33373B] lg:w-4/5 lg:h-18  justify-between p-2 pr-8 rounded-lg mt-6 md:ml-24 cursor-pointer"
+            >
+              <div className="flex items-center md:w-full">
+                <div className="min-w-fit mr-4  flex items-center md:justify-between md:w-24">
+                  <img
+                    src={track.image}
+                    alt="Artwork"
+                    className="w-12"
+                  />
+                  <div className="w-fit  ml-2">
+                    <svg
+                      width="18"
+                      height="16"
+                      viewBox="0 0 18 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M1.43496 8.37182C0.540791 5.58016 1.58662 2.10933 4.51746 1.16599C6.05912 0.668493 7.96162 1.08349 9.04246 2.57433C10.0616 1.02849 12.0191 0.671826 13.5591 1.16599C16.4891 2.10933 17.5408 5.58016 16.6475 8.37182C15.2558 12.7968 10.4 15.1018 9.04246 15.1018C7.68579 15.1018 2.87329 12.8485 1.43496 8.37182Z"
+                        stroke="#EFEEE0"
+                        strokeWidth="0.625"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                <div className="md:flex md:items-baseline   md:w-2/3 md:justify-between md:ml-6 ">
+                  <p className="text-gray-200 text-sm md:text-xl md:ml-8">
+                    {`${track.title} ~ ${track.artist}`}
+                  </p>
+
+                  <p className="text-gray-300 text-xs md:text-base md:ml-4">
+                    {`${topic}`}
+                  </p>
                 </div>
               </div>
-  
-              <div className="md:flex md:items-baseline   md:w-2/3 md:justify-between md:ml-6 ">
-                <p className="text-gray-200 text-sm md:text-xl md:ml-8">
-                  {`${track} ~ ${focusedAlbum[0].artist}`}
-                </p>
-  
-                <p className="text-gray-300 text-xs md:text-base md:ml-4">
-                 {`${focusedAlbum[0].title}`}
-                </p>
-              </div>
-            </div>
-  
-            <div className="text-gray-400  text-right flex flex-col justify-between items-end md:flex-row md:items-center  md:w-1/5">
-              <div className="p-0 md:order-2 md:ml-4 flex flex-col flex-wrap">
-                <p className="w-[3px] h-[3px]  rounded-full bg-[#FACD66] m-[2px]"></p>
-                <p className="w-[3px] h-[3px] rounded-full bg-[#FACD66] m-[2px]"></p>
-                <p className="w-[3px] h-[3px] rounded-full bg-[#FACD66] m-[2px]"></p>
 
-             
+              <div className="text-gray-400  text-right flex flex-col justify-between items-end md:flex-row md:items-center  md:w-1/5">
+                <div className="p-0 md:order-2 md:ml-4 flex flex-col flex-wrap">
+                  <p className="w-[3px] h-[3px]  rounded-full bg-[#FACD66] m-[2px]"></p>
+                  <p className="w-[3px] h-[3px] rounded-full bg-[#FACD66] m-[2px]"></p>
+                  <p className="w-[3px] h-[3px] rounded-full bg-[#FACD66] m-[2px]"></p>
+                </div>
+                <p>4:17</p>
               </div>
-              <p>4:17</p>
             </div>
-          </div>
-          })
-        }
-      </div>
+          );
+        })}
+      </div> </> : <><p className="text-center mx-auto text-xl">Loading</p></>
+      
+      }
+    
     </section>
   );
 };

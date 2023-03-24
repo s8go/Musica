@@ -21,7 +21,7 @@ const Trending = ({data, title}) => {
 
             <div className="mt-4">
               <h6 className="text-white text-xl font-thin mt-4">
-               {release.title}
+               {release.title.toString().slice(0, 17) + "..."}
               </h6>
               <p className="text-gray-500 text-sm font-light">{release.artist}</p>
             </div>

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({getSearchResult}) => {
   const Navigate = useNavigate();
   const [showMenu, setMenu] = useState(false);
   const [active, setActive] = useState("");
+  const ref = useRef(null);
+
+
 
   return (
     <>
@@ -290,12 +293,15 @@ const Nav = () => {
             </div>
           </div>
         </div>
-        <div className="text-xl text-gray-400 p-2 md:ml-20 md:w-full">
+        <div className=" flex flex-row text-xl text-gray-400 p-2 md:ml-20 md:w-full ">
           <input
             type="text"
+            name = "search"
+            ref={ref}
             placeholder="Search artist"
-            className="hidden md:block relative text-left text-sm text-white p-1 pl-12 pr-4 md:w-full w-48 rounded-full bg-transparent placeholder:text-gray-500 focus:outline-none"
-          />
+            className="block relative md:bg-transparent bg-gray-700 text-left text-sm text-white p-1 pl-12 pr-4 md:w-full w-full rounded-full bg-transparent placeholder:text-gray-500 focus:outline-none"
+         onChange={()=>getSearchResult(ref.current.value)}
+         />
           <div className="hidden md:block w-fit mt-5 absolute top-1 ml-4">
             <svg
               width="20"
@@ -324,30 +330,7 @@ const Nav = () => {
           </div>
 
           <div className="block md:hidden">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 30 30"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.75 23.75C19.2728 23.75 23.75 19.2728 23.75 13.75C23.75 8.22715 19.2728 3.75 13.75 3.75C8.22715 3.75 3.75 8.22715 3.75 13.75C3.75 19.2728 8.22715 23.75 13.75 23.75Z"
-                stroke="white"
-                strokeOpacity="0.25"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M26.25 26.25L20.8125 20.8125"
-                stroke="white"
-                strokeOpacity="0.25"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+          
           </div>
         </div>
       </div>

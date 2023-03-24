@@ -4,8 +4,8 @@ import Releases from "../Chat and Releases/Releases";
 import Likes from "../../images/Frame 4.png"
 import Home_img from "../../images/home-img.png"
 
-const Header = ({ data, ChangeFocus, selectSong }) => {
-  
+const Header = ({ data, selectSong, albums, selectAlbum }) => {
+
   return (
     <>
       <header className="h-full  text-white px-6 pt-16 lg:mb-8 md:ml-24 md:pt-0 lg:flex lg:justify-between lg:items-center max-w-[1440px]">
@@ -29,22 +29,22 @@ const Header = ({ data, ChangeFocus, selectSong }) => {
          </div>
 
          <div  className="w-1/2 hidden lg:block">
-        <img src={Home_img}  alt="Warzonnne" className="block w-full h-full" />
+        <img src={Home_img}  alt="W" className="block w-full h-full" />
          </div>
                  </div>
         <div className="lg:w-[40%] lg:h-[400px] lg:ml-12w-full">
-          <Chart data={data} ChangeFocus={ChangeFocus} />
+          <Chart data={albums} selectAlbum={selectAlbum}/>
         </div>
       </header>
       <div>
-      <Releases selectSong={selectSong} songs={[...data.songs].filter((song,i)=>{
+      <Releases url={"trending"} selectSong={selectSong} songs={data.filter((song,i)=>{
          let value = i < 15 && song;
          return value
         })} title="Trending Songs" />
       </div>
 
       <div className="lg:mt-20 mb-32">
-        <Releases songs={[...data.songs].sort((a, b)=> a.id - b.id)} selectSong={selectSong} title="Recomended For You" />
+        <Releases  url={"recomended"}songs={data.sort((a, b)=> a.id - b.id)} selectSong={selectSong} title="Recomended For You" />
       </div>
     </>
   );

@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Loader from "../Others/Loader";
 
 const Catalogue = ({ data, playSong }) => {
   const [currentView, setCurrentView] = useState("collection");
+  useEffect(()=>{
+    window.scrollTo(0,0)
+}, [])
 
   function viewComp(val){
     const element = val.map((col, index) => {
@@ -58,49 +62,51 @@ const Catalogue = ({ data, playSong }) => {
 
   return (
     <section className="mt-12 px-6 md:ml-24 min-w-fit pb-20">
-      <div className="flex flex-wrap justify-between md:justify-start">
-        <button
-          className={`rounded-full ${
-            currentView === "collection"
-              ? "bg-yellow-300"
-              : "border-2 border-gray-600 text-gray-600"
-          } p-3 text-sm w-[48%] max-w-[350px] md:p-2 md:w-32 md:mr-6 min-w-fit`}
-          onClick={() => setCurrentView("collection")}
-        >
-          My collection
-        </button>
-        <button
-          className={` ${
-            currentView === "likes"
-              ? "bg-yellow-300"
-              : "border-2 border-gray-600 text-gray-600"
-          } rounded-full p-3  text-sm w-[48%] max-w-[350px] md:p-2 min-w-fit md:w-32`}
-          onClick={() => setCurrentView("likes")}
-        >
-          Likes
-        </button>
-      </div>
+     {
+      data.likes?.length > 0 ? <> <div className="flex flex-wrap justify-between md:justify-start">
+      <button
+        className={`rounded-full ${
+          currentView === "collection"
+            ? "bg-yellow-300"
+            : "border-2 border-gray-600 text-gray-600"
+        } p-3 text-sm w-[48%] max-w-[350px] md:p-2 md:w-32 md:mr-6 min-w-fit`}
+        onClick={() => setCurrentView("collection")}
+      >
+        My collection
+      </button>
+      <button
+        className={` ${
+          currentView === "likes"
+            ? "bg-yellow-300"
+            : "border-2 border-gray-600 text-gray-600"
+        } rounded-full p-3  text-sm w-[48%] max-w-[350px] md:p-2 min-w-fit md:w-32`}
+        onClick={() => setCurrentView("likes")}
+      >
+        Likes
+      </button>
+    </div>
 
-      <div className="md:flex md:flex-wrap">
-      {data.collection.length > 0 && currentView === "collection"
-          ? collectionSkeleton
-          : currentView === "collection" && (
+    <div className="md:flex md:flex-wrap">
+    {data.collection.length > 0 && currentView === "collection"
+        ? collectionSkeleton
+        : currentView === "collection" && (
+          <h2 className=" p-4 m-auto text-3xl text-white">
+          Your collection is empty
+        </h2>
+          )}
+       
+    </div>
+
+    <div className="md:flex md:flex-wrap">
+      {data.likes.length > 0 && currentView === "likes"
+        ? likeSkeleton
+        : currentView === "likes" && (
             <h2 className=" p-4 m-auto text-3xl text-white">
-            Your collection is empty
-          </h2>
-            )}
-         
-      </div>
-
-      <div className="md:flex md:flex-wrap">
-        {data.likes.length > 0 && currentView === "likes"
-          ? likeSkeleton
-          : currentView === "likes" && (
-              <h2 className=" p-4 m-auto text-3xl text-white">
-                You haven't liked any music
-              </h2>
-            )}
-      </div>
+              You haven't liked any music
+            </h2>
+          )}
+    </div></> : <Loader/>
+     }
     </section>
   );
 };

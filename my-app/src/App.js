@@ -1,150 +1,103 @@
-import ReactAudioPlayer from "react-audio-player";
 import Header from "./Components/Header/Header";
 import Catalogue from "./Components/Collection/Catalogue";
+import ViewAlbum from "./Components/Collection/ViewAlbum";
 import ViewSong from "./Components/Collection/ViewSong";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Components/AppNav/Nav";
 import { useState, useEffect, useRef } from "react";
-import Error from "./Components/Error/Error";
+import Error from "./Components/Others/Error";
+import Loader from "./Components/Others/Loader";
 import Playing from "./Components/Playing/Playing";
 import Seego from "./Components/Seego";
-import allsongs from "./data/topchart.json";
-import { songs } from "./Songs";
-import NewMusic from "./Components/Upload/NewMusic";
-import PlayUpload from "./Components/Upload/PlayUpload";
+import Upload from "./Components/Upload/Upload";
 
+import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { app } from "./firebase.config";
+import SearchResults from "./Components/SearchResult/SearchResults";
+import Profile from "./Components/Profile/Profile";
 
 function App() {
-  const react_audio = useRef();
-  const [data, setData] = useState(allsongs);
-  const [focusedSong, setFocusedSong] = useState(allsongs.songs[0]);
-  const [songPlay, setSongPlay] = useState({
-    playing: false,
-    playIndex: Math.floor(Math.random() * allsongs.songs.length + 1),
-    shuffle: false,
-    loop: false,
-  });
-  const [playTime, setPlayTime] = useState(0);
-
-  const [currentPlay, setCurrentPlay] = useState(
-    allsongs.songs.filter((song) => {
-      let value = song.id === songPlay.playIndex && song;
-      return value;
-    })[0]
-  );
-
-  //This code does nothing actually
-  [songs][0].toString().charAt(0);
-
-  const currentTime = useRef(0);
-  const [duration, setDuration] = useState(0);
+  const [allSongs, setAllSongs] = useState([]);
+  const [allAlbums, setAllAlbums] = useState([]);
+  const [focusedAlbum, setFocusedAlbum] = useState({});
+  const [playing, setPlaying] = useState(0);
+  const [playPause, setPlayPause] = useState(false);
+  const [searchRes, setSearchRes] = useState([]);
+  const database = getFirestore(app);
+  let myCollection = collection(database, "songs");
+  let myAlbums = collection(database, "albums");
 
   useEffect(() => {
-    setCurrentPlay(
-      (curr) =>
-        allsongs.songs.filter((song) => {
-          let value = song.id === songPlay.playIndex && song;
-          return value;
-        })[0]
-    );
-    setTimeout(() => {
-      setDuration(react_audio.current?.audioEl.current?.duration);
-    }, 500);
+    window.scrollTo(0, 0);
+    goGet();
+  }, []);
+  
+  async function goGet() {
+    const querySnapshot = await getDocs(myCollection);
+    const data = await querySnapshot.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id };
+    });
 
-    const timeReader = setInterval(() => {
-      currentTime.current = react_audio.current?.audioEl.current.currentTime;
-    }, 1000);
+    const query = await getDocs(myAlbums);
+    const alb = await query.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id };
+    });
 
-    if (songPlay.playing) {
-      react_audio.current?.audioEl.current.play();
-    } else {
-      react_audio.current?.audioEl.current.pause();
-      clearInterval(timeReader);
-    }
-  }, [songPlay.playIndex, songPlay.playing, currentPlay]);
+    setAllSongs([...data].filter(i=>{
+      return i.date !== undefined
+  }).sort((a, b)=>{
+    return a.date - b.date
+  }).reverse());
+    setAllAlbums([...alb]);
+  }
+
+  function getSearchResult(val) {
+    let res = allSongs.filter((song) => {
+      if (val)
+        return (
+          song.title.toLowerCase().includes(val.toLowerCase()) ||
+          song.artist.toLowerCase().includes(val.toLowerCase())
+        );
+    });
+
+    setSearchRes(res);
+  }
 
   function playSong() {
-    setSongPlay((curr) => {
-      return { ...curr, playing: !curr.playing };
-    });
+    setPlayPause(!playPause);
   }
 
   function nextSong() {
-    setSongPlay((curr) => {
-      if (songPlay.playIndex < allsongs.songs.length && !songPlay.shuffle)
-        return {
-          ...curr,
-          playIndex: songPlay.playIndex + 1,
-          nextClick: curr.nextClick + 1,
-        };
-      if (songPlay.shuffle) {
-        return {
-          ...curr,
-          playIndex: Math.floor(Math.random() * allsongs.songs.length + 1),
-          nextClick: curr.nextClick + 1,
-        };
-      } else return { ...curr, playIndex: 1 };
-    });
-
-    setPlayTime(0);
+    setPlaying(playing + 1);
   }
 
   function prevSong() {
-    setSongPlay((curr) => {
-      if (songPlay.playIndex > 1 && !songPlay.shuffle)
-        return {
-          ...curr,
-          playIndex: songPlay.playIndex - 1,
-          nextClick: curr.nextClick + 1,
-        };
-      if (songPlay.shuffle) {
-        return {
-          ...curr,
-          playIndex: Math.floor(Math.random() * allsongs.songs.length + 1),
-          nextClick: curr.nextClick + 1,
-        };
-      } else return { ...curr, playIndex: allsongs.songs.length };
-    });
-
-    setPlayTime(0);
+    setPlaying(playing - 1);
   }
 
-  function selectSong(songIndex) {
-    setSongPlay((curr) => {
-      return { ...curr, playIndex: songIndex, playing: true };
-    });
-
-    setPlayTime(0);
-  }
-
-  function ChangeFocus(el) {
-    setFocusedSong(el);
-  }
-
-  function addToLikes(x) {
-    setData((curr) => {
-      return { ...curr, likes: [x, ...curr.collection] };
-    });
+  function selectSong(id) {
+    let selected = allSongs.findIndex((song) => song.id === id);
+    setPlaying(selected);
+    playSong();
   }
 
   return (
     <>
       <div className="bg-[#1D2123] py-20 pb-28 min-h-screen min-w-[200px]">
-        <ReactAudioPlayer src={currentPlay.path} ref={react_audio} />
-
         <BrowserRouter>
-          <Nav />
+          <Nav getSearchResult={getSearchResult} />
+          {searchRes.length > 0 && (
+            <SearchResults songs={searchRes} selectSong={selectSong} />
+          )}
 
           <Playing
-            currentPlay={currentPlay}
-            playSong={playSong}
-            nextSong={nextSong}
+            allSongs={allSongs}
+            playing={playing}
+            playPause={playPause}
             prevSong={prevSong}
-            time={{ playTime, setPlayTime }}
-            songPlay={songPlay}
-            setSongPlay={setSongPlay}
-            duration={duration}
-            songTime={react_audio.current?.audioEl.current?.currentTime}
+            nextSong={nextSong}
+            playSong={playSong}
           />
 
           <Routes>
@@ -152,41 +105,98 @@ function App() {
               index
               element={
                 <Header
-                  data={data}
-                  ChangeFocus={ChangeFocus}
+                  data={allSongs}
+                  selectSong={selectSong}
+                  albums={allAlbums}
+                  selectAlbum={setFocusedAlbum}
+                />
+              }
+            ></Route>
+
+            <Route
+              path="topalbums/album"
+              element={
+                <ViewAlbum data={allAlbums} focusedAlbum={focusedAlbum} />
+              }
+            ></Route>
+
+            <Route
+              path="trending"
+              element={
+                <ViewSong
+                  data={allSongs}
+                  topic="trending"
                   selectSong={selectSong}
                 />
               }
             ></Route>
             <Route
-              path="topalbums/:id"
+              path="home/trending"
               element={
                 <ViewSong
-                  data={data}
-                  focusedSong={focusedSong}
-                  addToLikes={addToLikes}
+                  data={allSongs}
+                  topic="trending"
+                  selectSong={selectSong}
                 />
               }
             ></Route>
+
+            <Route
+              path="home/recomended"
+              element={
+                <ViewSong
+                  data={allSongs}
+                  topic="For You"
+                  selectSong={selectSong}
+                />
+              }
+            ></Route>
+
+            <Route
+              path="recomended"
+              element={
+                <ViewSong
+                  data={allSongs}
+                  topic="For You"
+                  selectSong={selectSong}
+                />
+              }
+            ></Route>
+
             <Route
               path="collection"
-              element={<Catalogue data={data} playSong={selectSong} />}
+              element={
+                <Catalogue
+                  data={{
+                    collection: allSongs.reverse(),
+                    likes: allSongs,
+                  }}
+                  playSong={selectSong}
+                />
+              }
             ></Route>
 
             <Route
               path="home"
               element={
                 <Header
-                  data={data}
-                  ChangeFocus={ChangeFocus}
+                  data={allSongs}
                   selectSong={selectSong}
+                  albums={allAlbums}
+                  selectAlbum={setFocusedAlbum}
                 />
               }
             ></Route>
 
+            <Route
+              path="me"
+              element={
+               <Profile data={allSongs} selectSong={selectSong}/>
+              }
+            ></Route>
+
+            <Route path="/upload234" element={<Upload />}></Route>
             <Route path="*" element={<Error />}></Route>
-            <Route path="/upload" element={<NewMusic />}></Route>
-            <Route path="/newmusic" element={<PlayUpload />}></Route>
           </Routes>
 
           <footer className="bg-[#1D2123]  h-[150px] flex justify-center text-white">
