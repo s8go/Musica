@@ -4,18 +4,19 @@ import Loader from "../Others/Loader";
 
 const ViewSong = ({ data }) => {
   const params = new URLSearchParams(useLocation().search);
+  const url = params.get("id");
   const [focusedAlbum, setFocusedAlbum] = useState([])
-
+  
   useEffect(()=>{
     window.scrollTo(0,0)
-}, [])
-
+  }, [])
+  
   useEffect(()=>{
     let alb = data.filter((song)=>{
-    return song.id === params.get("id")
+      return song.id === url
     })
     setFocusedAlbum(alb)
-  }, [data])
+  },[data, url])
 
 
   return (

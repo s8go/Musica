@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {Swiper, SwiperSlide} from "swiper/react"
-import {freemode} from "swiper"
 import "swiper/css"
 import Loader from "../Others/Loader";
 

@@ -5,9 +5,8 @@ import ViewSong from "./Components/Collection/ViewSong";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Components/AppNav/Nav";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Error from "./Components/Others/Error";
-import Loader from "./Components/Others/Loader";
 import Playing from "./Components/Playing/Playing";
 import Seego from "./Components/Seego";
 import Upload from "./Components/Upload/Upload";
@@ -28,12 +27,7 @@ function App() {
   let myCollection = collection(database, "songs");
   let myAlbums = collection(database, "albums");
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    goGet();
-  }, []);
-  
-  async function goGet() {
+  const goGet = useCallback(async ()=>{
     const querySnapshot = await getDocs(myCollection);
     const data = await querySnapshot.docs.map((doc) => {
       return { ...doc.data(), id: doc.id };
@@ -44,24 +38,44 @@ function App() {
       return { ...doc.data(), id: doc.id };
     });
 
-    setAllSongs([...data].filter(i=>{
-      return i.date !== undefined
-  }).sort((a, b)=>{
-    return a.date - b.date
-  }).reverse());
+    setAllSongs(
+      [...data]
+        .filter((i) => {
+          return i.date !== undefined;
+        })
+        .sort((a, b) => {
+          return a.date - b.date;
+        })
+        .reverse()
+    );
     setAllAlbums([...alb]);
-  }
+  }, [myAlbums, myCollection]
+)
+
+
+  useEffect(() => {
+    goGet();
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+ 
 
   function getSearchResult(val) {
+    if (val.length < 1) {
+    setSearchRes([]);
+      return;
+    }
     let res = allSongs.filter((song) => {
-      if (val)
-        return (
-          song.title.toLowerCase().includes(val.toLowerCase()) ||
-          song.artist.toLowerCase().includes(val.toLowerCase())
-        );
+      return (
+        song.title.toLowerCase().includes(val.toLowerCase()) ||
+        song.artist.toLowerCase().includes(val.toLowerCase())
+      );
     });
 
-    setSearchRes(res);
+    setSearchRes(res)
   }
 
   function playSong() {
@@ -190,9 +204,7 @@ function App() {
 
             <Route
               path="me"
-              element={
-               <Profile data={allSongs} selectSong={selectSong}/>
-              }
+              element={<Profile data={allSongs} selectSong={selectSong} />}
             ></Route>
 
             <Route path="/upload234" element={<Upload />}></Route>

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
 
 const ViewSong = ({ data: focusedAlbum, topic, selectSong }) => {
   
@@ -157,8 +156,8 @@ useEffect(()=>{
           </div>
         </div>
 
-        {focusedAlbum.map((track, i) => {
-         if(i < 20) return (
+        {focusedAlbum.slice(0, 20).map((track, i) => {
+          return (
             <div
             onClick={()=>selectSong(track.id)}
               key={track.id}
