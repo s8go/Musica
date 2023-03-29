@@ -93,7 +93,7 @@ function App() {
   function selectSong(id) {
     let selected = allSongs.findIndex((song) => song.id === id);
     setPlaying(selected);
-    playSong();
+    setPlayPause(true);
   }
 
   return (
