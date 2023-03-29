@@ -25,3 +25,12 @@
     background: #facd66;
   }
 }
+
+@keyframes load {
+  from {
+    background: transparent;
+  }
+  to {
+    background: #facd66;
+  }
+}
