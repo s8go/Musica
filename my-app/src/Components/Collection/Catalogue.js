@@ -31,7 +31,7 @@ const Catalogue = ({ data, playSong }) => {
   
           <div className="flex text-[#EFEEE0] justify-between mt-4 px-3 static z-[700] transition duration-1000 translate-y-8 group-hover:translate-y-0 group-hover:h-fit">
             <p className="text-sm p-2 opacity-0  transition duration-300 delay-300 group-hover:opacity-100">
-              {Math.floor((col.id) + 10) / 10}m likes
+              {Math.floor((Math.random()) + 10) / 10}m likes
             </p>
             <div
               className="w-fit flex items-center opacity-0  transition duration-300 delay-300 group-hover:opacity-100"

@@ -27,7 +27,7 @@ function App() {
   let myCollection = collection(database, "songs");
   let myAlbums = collection(database, "albums");
 
-  const goGet = useCallback(async ()=>{
+  const goGet = useCallback(async () => {
     const querySnapshot = await getDocs(myCollection);
     const data = await querySnapshot.docs.map((doc) => {
       return { ...doc.data(), id: doc.id };
@@ -38,28 +38,21 @@ function App() {
       return { ...doc.data(), id: doc.id };
     });
 
-    setAllSongs(
-      [...data]
-    );
+    setAllSongs([...data]);
     setAllAlbums([...alb]);
-  }, [myAlbums, myCollection]
-)
-
+  }, [myAlbums, myCollection]);
 
   useEffect(() => {
     goGet();
   }, []);
 
-  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
- 
-
   function getSearchResult(val) {
     if (val.length < 1) {
-    setSearchRes([]);
+      setSearchRes([]);
       return;
     }
     let res = allSongs.filter((song) => {
@@ -69,7 +62,7 @@ function App() {
       );
     });
 
-    setSearchRes(res)
+    setSearchRes(res);
   }
 
   function playSong() {
@@ -88,7 +81,7 @@ function App() {
     let selected = allSongs.findIndex((song) => song.id === id);
     setPlaying(selected);
     setPlayPause(true);
-    console.log(selected, allSongs[selected], allSongs)
+    console.log(selected, allSongs[selected], allSongs);
   }
 
   return (
@@ -177,7 +170,7 @@ function App() {
               element={
                 <Catalogue
                   data={{
-                    collection: allSongs.reverse(),
+                    collection: allSongs,
                     likes: allSongs,
                   }}
                   playSong={selectSong}

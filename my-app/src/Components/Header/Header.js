@@ -37,14 +37,11 @@ const Header = ({ data, selectSong, albums, selectAlbum }) => {
         </div>
       </header>
       <div>
-      <Releases url={"trending"} selectSong={selectSong} songs={data.filter((song,i)=>{
-         let value = i < 15 && song;
-         return value
-        })} title="Trending Songs" />
+      <Releases url={"trending"} selectSong={selectSong} songs={data} title="Trending Songs" />
       </div>
 
       <div className="lg:mt-20 mb-32">
-        <Releases  url={"recomended"}songs={data.sort((a, b)=> a.id - b.id)} selectSong={selectSong} title="Recomended For You" />
+        <Releases  url={"recomended"}songs={data} selectSong={selectSong} title="Recomended For You" />
       </div>
     </>
   );
