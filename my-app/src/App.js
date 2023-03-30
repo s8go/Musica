@@ -40,7 +40,7 @@ function App() {
 
     setAllSongs(
       [...data].sort((a, b) => {
-        return a.date - b.date;
+        return b.date - a.date;
       })
     );
     setAllAlbums([...alb]);
