@@ -50,6 +50,7 @@ function App() {
     goGet();
   }, []);
 
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -87,6 +88,7 @@ function App() {
     let selected = allSongs.findIndex((song) => song.id === id);
     setPlaying(selected);
     setPlayPause(true);
+    console.log(selected, allSongs[selected], allSongs)
   }
 
   return (
