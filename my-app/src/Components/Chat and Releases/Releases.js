@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
+import {Navigation} from "swiper"
 import "swiper/css";
+import "swiper/css/navigation";
 import Loader from "../Others/Loader";
 
 const Releases = ({ songs, title, selectSong, url }) => {
+  const screen = window.screen.availWidth > 1024
+
   return (
     <section className="px-6 mt-12 md:ml-24">
       <div className="flex justify-between items-center">
@@ -19,6 +23,9 @@ const Releases = ({ songs, title, selectSong, url }) => {
           <Swiper
             freeMode={true}
             speed={800}
+            modules={[Navigation]}
+            
+            navigation={screen}
             breakpoints={{
               0: {
                 slidesPerView: 1.3,
