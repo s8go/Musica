@@ -49,6 +49,7 @@ function App() {
   useEffect(() => {
     goGet();
   }, []);
+  console.log(allSongs[0])
 
   useEffect(() => {
     window.scrollTo(0, 0);
