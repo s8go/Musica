@@ -17,11 +17,11 @@ const Releases = ({ songs, title, selectSong, url }) => {
       <div className="overflow-x-scroll scrollbar-none mt-6 p-2">
         {songs.length > 0 ? (
           <Swiper
-            className="flex w-full min-w-max "
             freeMode={true}
+            speed={800}
             breakpoints={{
               0: {
-                slidesPerView: 1.5,
+                slidesPerView: 1.3,
               },
 
               600: {
@@ -32,15 +32,16 @@ const Releases = ({ songs, title, selectSong, url }) => {
               },
             }}
           >
-            {songs.map((release, i) => {
+            {songs.slice(0, 9).map((release, i) => {
               return (
                 <SwiperSlide
-                  className=" mx-1 p-2 max-w-[200px] rounded-xl cursor-pointer bg-[#1A1E1F]"
                   key={i}
-                  onClick={() => {
+                >
+                  <div    onClick={() => {
                     selectSong(release.id);
                   }}
-                >
+                  className="mx-1 p-2 max-w-[200px] rounded-xl cursor-pointer bg-[#1A1E1F]">
+
                   <div className="flex justify-between">
                     <img
                       src={release.image}
@@ -56,6 +57,7 @@ const Releases = ({ songs, title, selectSong, url }) => {
                     <p className="text-gray-500 text-sm font-light">
                       {release.artist}
                     </p>
+                  </div>
                   </div>
                 </SwiperSlide>
               );

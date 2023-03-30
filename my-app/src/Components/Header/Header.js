@@ -41,7 +41,7 @@ const Header = ({ data, selectSong, albums, selectAlbum }) => {
       </div>
 
       <div className="lg:mt-20 mb-32">
-        <Releases  url={"recomended"}songs={data} selectSong={selectSong} title="Recomended For You" />
+        <Releases  url={"recomended"}songs={data.filter((item)=>item.uploadBy === "Seego")} selectSong={selectSong} title="Recomended For You" />
       </div>
     </>
   );
