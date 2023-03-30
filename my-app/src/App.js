@@ -38,7 +38,11 @@ function App() {
       return { ...doc.data(), id: doc.id };
     });
 
-    setAllSongs([...data]);
+    setAllSongs(
+      [...data].sort((a, b) => {
+        return a.date - b.date;
+      })
+    );
     setAllAlbums([...alb]);
   }, [myAlbums, myCollection]);
 
@@ -70,10 +74,12 @@ function App() {
   }
 
   function nextSong() {
+    if (playing >= allSongs.length -1) return;
     setPlaying(playing + 1);
   }
 
   function prevSong() {
+    if (playing <= 0) return;
     setPlaying(playing - 1);
   }
 
@@ -81,7 +87,6 @@ function App() {
     let selected = allSongs.findIndex((song) => song.id === id);
     setPlaying(selected);
     setPlayPause(true);
-    console.log(selected, allSongs[selected], allSongs);
   }
 
   return (
