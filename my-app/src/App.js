@@ -40,13 +40,6 @@ function App() {
 
     setAllSongs(
       [...data]
-        .filter((i) => {
-          return i.date !== undefined;
-        })
-        .sort((a, b) => {
-          return a.date - b.date;
-        })
-        .reverse()
     );
     setAllAlbums([...alb]);
   }, [myAlbums, myCollection]
