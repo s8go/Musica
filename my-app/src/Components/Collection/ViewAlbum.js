@@ -35,7 +35,7 @@ const ViewSong = ({ data }) => {
                 </h1>
                 <p className="text-[#EFEEE0] text-lg mt-4">
                   Renowned superstar {focusedAlbum[0].artist} has released a new
-                  album titled “Timeless”, much to the delight of his fans all
+                  album titled {focusedAlbum[0].title}, much to the delight of his fans all
                   around the world. The album is a continuation of his
                   successful music career, with fans eagerly anticipating what
                   the singer has in store for them.
