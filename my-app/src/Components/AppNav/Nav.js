@@ -1,13 +1,11 @@
 import React, { useState, useRef } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 
-const Nav = ({getSearchResult}) => {
+const Nav = ({ getSearchResult }) => {
   const Navigate = useNavigate();
   const [showMenu, setMenu] = useState(false);
   const [active, setActive] = useState("");
   const ref = useRef(null);
-
-
 
   return (
     <>
@@ -181,9 +179,9 @@ const Nav = ({getSearchResult}) => {
           <li className=" flex w-1/2 m-auto md:pt-8  md:flex-col items-center justify-evenly md:justify-center text-2xl md:text-xs md:mx-auto md:m-2 hover:text-gray-300 duration-500 ">
             <NavLink
               className={"flex justify-between"}
-              to="/profile"
+              to="/me"
               onClick={() => {
-                setActive("profile");
+                setActive("me");
               }}
             >
               <div>
@@ -196,19 +194,19 @@ const Nav = ({getSearchResult}) => {
                 >
                   <path
                     d="M11 1.83333C8.59837 1.83333 6.64587 3.78583 6.64587 6.18749C6.64587 8.54333 8.48837 10.45 10.89 10.5325C10.9634 10.5233 11.0367 10.5233 11.0917 10.5325C11.11 10.5325 11.1192 10.5325 11.1375 10.5325C11.1467 10.5325 11.1467 10.5325 11.1559 10.5325C13.5025 10.45 15.345 8.54333 15.3542 6.18749C15.3542 3.78583 13.4017 1.83333 11 1.83333Z"
-                    fill={active === "profile" ? "#FACD66" : "#EFEEE0"}
-                    fillOpacity={active !== "profile" ? "0.25" : ""}
+                    fill={active === "me" ? "#FACD66" : "#EFEEE0"}
+                    fillOpacity={active !== "me" ? "0.25" : ""}
                   />
                   <path
                     d="M15.6566 12.9708C13.0991 11.2658 8.9283 11.2658 6.35246 12.9708C5.1883 13.75 4.54663 14.8042 4.54663 15.9317C4.54663 17.0592 5.1883 18.1042 6.3433 18.8742C7.62663 19.7358 9.3133 20.1667 11 20.1667C12.6866 20.1667 14.3733 19.7358 15.6566 18.8742C16.8116 18.095 17.4533 17.05 17.4533 15.9133C17.4441 14.7858 16.8116 13.7408 15.6566 12.9708Z"
-                    fill={active === "profile" ? "#FACD66" : "#EFEEE0"}
-                    fillOpacity={active !== "profile" ? "0.25" : ""}
+                    fill={active === "me" ? "#FACD66" : "#EFEEE0"}
+                    fillOpacity={active !== "me" ? "0.25" : ""}
                   />
                 </svg>
               </div>
 
               <p className="md:hidden text-[#EFEEE0] text-sm w-[100px] text-left ml-8">
-                profile
+                me
               </p>
             </NavLink>
           </li>
@@ -262,13 +260,11 @@ const Nav = ({getSearchResult}) => {
                 showMenu ? "-rotate-45 origin-center w-4 -translate-x-1" : "w-4"
               } md:hidden mr-4 bg-white  h-[.1em] mt-1`}
             ></div>
-         
           </div>
           <div
             className="flex cursor-pointer ml-1 "
             onClick={() => Navigate("/")}
           >
-          
             <div>
               <svg
                 width="34"
@@ -296,12 +292,12 @@ const Nav = ({getSearchResult}) => {
         <div className=" flex flex-row text-xl text-gray-400 p-2 md:ml-20 md:w-full ">
           <input
             type="text"
-            name = "search"
+            name="search"
             ref={ref}
             placeholder="Search artist"
             className="block relative md:bg-transparent bg-gray-700 text-left text-sm text-white p-1 pl-12 pr-4 md:w-full w-full rounded-full bg-transparent placeholder:text-gray-500 focus:outline-none"
-         onChange={()=>getSearchResult(ref.current.value)}
-         />
+            onChange={() => getSearchResult(ref.current.value)}
+          />
           <div className="hidden md:block w-fit mt-5 absolute top-1 ml-4">
             <svg
               width="20"
@@ -329,9 +325,7 @@ const Nav = ({getSearchResult}) => {
             </svg>
           </div>
 
-          <div className="block md:hidden">
-          
-          </div>
+          <div className="block md:hidden"></div>
         </div>
       </div>
     </>

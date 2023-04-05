@@ -1,3 +1,1 @@
-import { storage} from "../../firebase.config";
-
-
+import { storage } from "../../firebase.config";
