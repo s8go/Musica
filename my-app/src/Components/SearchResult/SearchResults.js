@@ -2,7 +2,7 @@ import React from "react";
 
 const SearchResults = ({ songs, selectSong }) => {
   return (
-    <div className="fixed top-20 w-full md:w-1/2 min-w-[200px] text-yellow-500 text-base px-5 py-2 bg-gray-700 left-0 md:left-[20%] rounded-xl">
+    <div className="fixed z-[100000] overflow-y-auto top-20 w-full h-full md:w-1/2 min-w-[200px] text-yellow-500 text-base px-5 py-2 bg-gray-700 left-0 md:left-[20%] rounded-xl">
       {songs.length > 0 ? (
         <div>
           {songs.map((song) => {
@@ -10,7 +10,7 @@ const SearchResults = ({ songs, selectSong }) => {
               <div
                 key={song.id}
                 className="my-3 flex items-center bg-[#33373B] justify-evenly cursor-pointer  p-3 rounded-xl"
-                onClick={()=>selectSong(song.id)}
+                onClick={() => selectSong(song.id)}
               >
                 <img src={song.image} alt="song img" className="block w-8" />
                 <svg

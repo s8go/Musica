@@ -12,9 +12,10 @@ import Seego from "./Components/Seego";
 import Upload from "./Components/Upload/Upload";
 
 import { getFirestore, getDocs, collection } from "firebase/firestore";
-import { app } from "./firebase.config";
 import SearchResults from "./Components/SearchResult/SearchResults";
 import Profile from "./Components/Profile/Profile";
+import { app } from "./firebase.config";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 function App() {
   const [allSongs, setAllSongs] = useState([]);
@@ -26,6 +27,29 @@ function App() {
   const database = getFirestore(app);
   let myCollection = collection(database, "songs");
   let myAlbums = collection(database, "albums");
+  const [user, setUser] = useState({});
+  const auth = getAuth();
+  const google = new GoogleAuthProvider();
+
+  function signIn() {
+    signInWithPopup(auth, google).then((res) => {
+      const user = {
+        username: res.user.email.slice(0, res.user.email.indexOf("@")),
+        email: res.user.email,
+        image: res.user.photoURL,
+        displayName: res.user.displayName,
+      };
+      setUser({ ...user });
+      window.localStorage.user = JSON.stringify({
+        ...user,
+      });
+    });
+  }
+
+  function Logout() {
+    setUser({});
+    window.localStorage.clear();
+  }
 
   const goGet = useCallback(async () => {
     const querySnapshot = await getDocs(myCollection);
@@ -47,14 +71,19 @@ function App() {
   }, [myAlbums, myCollection]);
 
   useEffect(() => {
+    if (!window.localStorage.user)
+      window.localStorage.user = JSON.stringify({});
+    else {
+      const user = JSON.parse(window.localStorage.user);
+      setUser({ ...user });
+    }
     goGet();
   }, []);
-  console.log(window.screen.availWidth)
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  
   function getSearchResult(val) {
     if (val.length < 1) {
       setSearchRes([]);
@@ -75,7 +104,7 @@ function App() {
   }
 
   function nextSong() {
-    if (playing >= allSongs.length -1) return;
+    if (playing >= allSongs.length - 1) return;
     setPlaying(playing + 1);
   }
 
@@ -92,7 +121,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-[#1D2123] py-20 pb-28 min-h-screen min-w-[200px]">
+      <div className="bg-[#1D2123] py-20 pb-28 min-h-screen min-w-[250px]">
         <BrowserRouter>
           <Nav getSearchResult={getSearchResult} />
           {searchRes.length > 0 && (
@@ -198,10 +227,21 @@ function App() {
 
             <Route
               path="me"
-              element={<Profile data={allSongs} selectSong={selectSong} />}
+              element={
+                <Profile
+                  data={allSongs}
+                  selectSong={selectSong}
+                  signIn={signIn}
+                  user={user}
+                  Logout={Logout}
+                />
+              }
             ></Route>
 
-            <Route path="/upload234" element={<Upload />}></Route>
+            <Route
+              path="/me/upload234"
+              element={<Upload user={user} signIn={signIn} />}
+            ></Route>
             <Route path="*" element={<Error />}></Route>
           </Routes>
 
