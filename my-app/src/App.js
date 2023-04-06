@@ -5,7 +5,7 @@ import ViewSong from "./Components/Collection/ViewSong";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Components/AppNav/Nav";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Error from "./Components/Others/Error";
 import Playing from "./Components/Playing/Playing";
 import Seego from "./Components/Seego";
@@ -25,8 +25,7 @@ function App() {
   const [playPause, setPlayPause] = useState(false);
   const [searchRes, setSearchRes] = useState([]);
   const database = getFirestore(app);
-  let myCollection = collection(database, "songs");
-  let myAlbums = collection(database, "albums");
+
   const [user, setUser] = useState({});
   const auth = getAuth();
   const google = new GoogleAuthProvider();
@@ -51,39 +50,43 @@ function App() {
     window.localStorage.clear();
   }
 
-  const goGet = useCallback(async () => {
-    const querySnapshot = await getDocs(myCollection);
-    const data = await querySnapshot.docs.map((doc) => {
-      return { ...doc.data(), id: doc.id };
-    });
-
-    const query = await getDocs(myAlbums);
-    const alb = await query.docs.map((doc) => {
-      return { ...doc.data(), id: doc.id };
-    });
-
-    setAllSongs(
-      [...data].sort((a, b) => {
-        return b.date - a.date;
-      })
-    );
-    setAllAlbums([...alb]);
-  }, [myAlbums, myCollection]);
-
   useEffect(() => {
     if (!window.localStorage.user)
       window.localStorage.user = JSON.stringify({});
     else {
-      const user = JSON.parse(window.localStorage.user);
-      setUser({ ...user });
+      const userD = JSON.parse(window.localStorage.user);
+      setUser({ ...userD });
     }
+
+    const goGet = async () => {
+      let myCollection = collection(database, "songs");
+      let myAlbums = collection(database, "albums");
+
+      getDocs(myCollection).then((res) => {
+        let allSongs = res.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        });
+        setAllSongs([...allSongs]);
+        console.log(allSongs);
+      });
+
+      getDocs(myAlbums).then((res) => {
+        let allAlbums = res.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        });
+
+        setAllAlbums([...allAlbums]);
+        console.log(allAlbums);
+      });
+    };
+
     goGet();
-  }, []);
+  }, [database]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   function getSearchResult(val) {
     if (val.length < 1) {
       setSearchRes([]);
