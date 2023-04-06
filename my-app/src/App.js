@@ -66,7 +66,7 @@ function App() {
         let allSongs = res.docs.map((doc) => {
           return { ...doc.data(), id: doc.id };
         });
-        setAllSongs([...allSongs]);
+        setAllSongs(allSongs.sort((a, b)=>b.date - a.date));
       });
 
       getDocs(myAlbums).then((res) => {
@@ -74,7 +74,7 @@ function App() {
           return { ...doc.data(), id: doc.id };
         });
 
-        setAllAlbums([...allAlbums]);
+        setAllAlbums(allAlbums);
       });
     };
 
