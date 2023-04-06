@@ -67,7 +67,6 @@ function App() {
           return { ...doc.data(), id: doc.id };
         });
         setAllSongs([...allSongs]);
-        console.log(allSongs);
       });
 
       getDocs(myAlbums).then((res) => {
@@ -76,7 +75,6 @@ function App() {
         });
 
         setAllAlbums([...allAlbums]);
-        console.log(allAlbums);
       });
     };
 
